@@ -1,0 +1,10 @@
+{
+  "name": "@robanderson513/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens",
+  "files": ["dist"],
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
