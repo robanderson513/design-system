@@ -1,0 +1,12 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "borderRadius": {
+    "$type": "dimension",
+    "none": { "$value": "0px" },
+    "sm": { "$value": "2px" },
+    "md": { "$value": "4px" },
+    "lg": { "$value": "8px" },
+    "xl": { "$value": "12px" },
+    "full": { "$value": "9999px" }
+  }
+}
