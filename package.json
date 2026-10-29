@@ -6,7 +6,9 @@
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./css": "./dist/tokens.css"
+    "./css": "./dist/tokens.css",
+    "./common": "./dist/common.css",
+    "./common.css": "./dist/common.css"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

@@ -31,8 +31,7 @@ const gap = tokens.spacing.gap.default;
 const bodySize = tokens.typography.fontSize.body;
 ```
 
-Token groups use nested lowercase names, so state and intent can grow without camelCase compound keys; for example, `color.action.primary.hover` maps to `--color-action-primary-hover`. CSS consumers can import `@robanderson513/tokens/css` to use the semantic custom properties. The package does not provide utility classes; those are deferred.
-
+Token groups use nested lowercase names, so state and intent can grow without camelCase compound keys; for example, `color.action.primary.hover` maps to `--color-action-primary-hover`. CSS consumers can import `@robanderson513/tokens/css` to use the semantic custom properties, and `@robanderson513/tokens/common` for reusable layout and typography utility classes.
 ## Previewing the palette
 
 Serve the repository root with a local HTTP server and open `preview.html`. The page loads the semantic and primitive source JSON directly, so opening it as a `file://` URL may prevent the preview from loading.
