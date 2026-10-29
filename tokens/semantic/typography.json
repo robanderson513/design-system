@@ -1,0 +1,32 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "typography": {
+    "fontFamily": {
+      "$type": "fontFamily",
+      "body": { "$value": "{fontFamily.sans}" },
+      "heading": { "$value": "{fontFamily.sans}" },
+      "code": { "$value": "{fontFamily.mono}" }
+    },
+    "fontSize": {
+      "$type": "dimension",
+      "caption": { "$value": "{fontSize.xs}" },
+      "label": { "$value": "{fontSize.sm}" },
+      "body": { "$value": "{fontSize.base}" },
+      "title": { "$value": "{fontSize.2xl}" },
+      "heading": { "$value": "{fontSize.3xl}" },
+      "display": { "$value": "{fontSize.5xl}" }
+    },
+    "fontWeight": {
+      "$type": "fontWeight",
+      "body": { "$value": "{fontWeight.regular}" },
+      "emphasis": { "$value": "{fontWeight.medium}" },
+      "strong": { "$value": "{fontWeight.semibold}" }
+    },
+    "lineHeight": {
+      "$type": "number",
+      "body": { "$value": "{lineHeight.normal}" },
+      "heading": { "$value": "{lineHeight.tight}" },
+      "relaxed": { "$value": "{lineHeight.relaxed}" }
+    }
+  }
+}

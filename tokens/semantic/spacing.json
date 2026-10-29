@@ -1,0 +1,24 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "spacing": {
+    "$type": "dimension",
+    "gap": {
+      "tight": { "$value": "{spacing.2}" },
+      "compact": { "$value": "{spacing.3}" },
+      "default": { "$value": "{spacing.4}" },
+      "relaxed": { "$value": "{spacing.6}" },
+      "section": { "$value": "{spacing.8}" }
+    },
+    "padding": {
+      "compact": { "$value": "{spacing.2}" },
+      "control": { "$value": "{spacing.3}" },
+      "card": { "$value": "{spacing.6}" },
+      "section": { "$value": "{spacing.8}" }
+    },
+    "margin": {
+      "element": { "$value": "{spacing.4}" },
+      "section": { "$value": "{spacing.8}" },
+      "page": { "$value": "{spacing.12}" }
+    }
+  }
+}

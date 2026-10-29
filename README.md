@@ -1,15 +1,14 @@
 # Design System
 
-A platform-neutral design system foundation for sharing design decisions across apps and tools. Its reusable primitives use the W3C Design Tokens Community Group (DTCG) JSON format.
+A platform-neutral design system foundation for sharing design decisions across apps and tools. DTCG primitive tokens back a semantic API for consuming apps.
 
 ## What's inside
 
-- **Color primitives:** named color ramps for foundational UI values.
-- **Utility primitives:** spacing, font families, font sizes, font weights, line heights, and border radii.
-- **Package entry point:** a CommonJS export for JavaScript consumers, plus direct JSON exports for tools that read DTCG tokens.
-- **Color preview:** [`preview.html`](preview.html) displays the available ramps from the source JSON.
+- **Semantic tokens:** color roles, layout spacing, typography, and border radii, backed by internal primitives.
+- **Package entry point:** resolved semantic values for JavaScript consumers and a CSS custom-property export.
+- **Color preview:** [`preview.html`](preview.html) displays semantic color roles from the source JSON.
 
-Primitive tokens are building blocks, not semantic role assignments or accessibility guarantees. Choose color pairs for their intended context and do not rely on color alone to convey meaning.
+Primitive tokens are internal building blocks, not part of the public package API. Semantic color assignments are not accessibility guarantees; choose color pairs for their intended context and do not rely on color alone to convey meaning.
 
 ## Using the tokens
 
@@ -19,18 +18,21 @@ Configure npm to use the GitHub Packages registry for this package, then install
 npm install @robanderson513/tokens
 ```
 
-In CommonJS, access token values through the package entry point:
+In CommonJS, access semantic values through the package entry point:
 
 ```js
 const tokens = require('@robanderson513/tokens');
 
-const blue = tokens.color.blue['600'].$value;
-const gap = tokens.spacing['4'].$value;
-const bodySize = tokens.fontSize.base.$value;
+const primary = tokens.color.primary;
+const primaryActionHover = tokens.color.action.primary.hover;
+const successText = tokens.color.status.success.foreground;
+const surface = tokens.color.surface.default;
+const gap = tokens.spacing.gap.default;
+const bodySize = tokens.typography.fontSize.body;
 ```
 
-Tools that consume DTCG JSON can use exports such as `@robanderson513/tokens/primitives/colors` and `@robanderson513/tokens/primitives/typography`.
+Token groups use nested lowercase names, so state and intent can grow without camelCase compound keys; for example, `color.action.primary.hover` maps to `--color-action-primary-hover`. CSS consumers can import `@robanderson513/tokens/css` to use the semantic custom properties. The package does not provide utility classes; those are deferred.
 
 ## Previewing the palette
 
-Serve the repository root with a local HTTP server and open `preview.html`. The page loads the token JSON directly, so opening it as a `file://` URL may prevent the palette from loading.
+Serve the repository root with a local HTTP server and open `preview.html`. The page loads the semantic and primitive source JSON directly, so opening it as a `file://` URL may prevent the preview from loading.
