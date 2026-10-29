@@ -1,6 +1,6 @@
-# Design tokens
+# Design System
 
-A platform-neutral design-token library for sharing design decisions across apps and tools. Tokens use the W3C Design Tokens Community Group (DTCG) JSON format.
+A platform-neutral design system foundation for sharing design decisions across apps and tools. Its reusable primitives use the W3C Design Tokens Community Group (DTCG) JSON format.
 
 ## What's inside
 
