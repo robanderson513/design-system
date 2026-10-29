@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Design token color preview</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, sans-serif;
+        background: #f8fafc;
+        color: #172033;
+      }
+
+      body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 24px;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+      }
+
+      .intro {
+        margin-top: 0;
+        color: #526174;
+      }
+
+      .scale {
+        margin-top: 36px;
+      }
+
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+        gap: 12px;
+      }
+
+      .swatch {
+        overflow: hidden;
+        border: 1px solid #dce2ea;
+        border-radius: 10px;
+        background: white;
+      }
+
+      .color {
+        min-height: 100px;
+      }
+
+      .details {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      .value {
+        color: #526174;
+        font-family: ui-monospace, monospace;
+      }
+
+      #status {
+        color: #9b1c1c;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Color primitives</h1>
+      <p class="intro">Neutral, blue, green, red, yellow, and purple color ramps loaded from <code>tokens/primitives/colors.json</code>.</p>
+    </header>
+    <main id="palette" aria-live="polite"></main>
+    <p id="status" role="status"></p>
+
+    <script>
+      const palette = document.querySelector('#palette');
+      const status = document.querySelector('#status');
+
+      fetch('./tokens/primitives/colors.json')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Could not load tokens (${response.status}).`);
+          }
+          return response.json();
+        })
+        .then(({ color }) => {
+          for (const [name, scale] of Object.entries(color)) {
+            if (name.startsWith('$')) continue;
+
+            const section = document.createElement('section');
+            section.className = 'scale';
+
+            const heading = document.createElement('h2');
+            heading.textContent = `${name[0].toUpperCase()}${name.slice(1)}`;
+
+            const swatches = document.createElement('div');
+            swatches.className = 'swatches';
+
+            for (const [step, token] of Object.entries(scale)) {
+              if (step.startsWith('$')) continue;
+
+              const card = document.createElement('article');
+              card.className = 'swatch';
+
+              const sample = document.createElement('div');
+              sample.className = 'color';
+              sample.style.backgroundColor = token.$value;
+              sample.setAttribute('aria-label', `${name} ${step}: ${token.$value}`);
+
+              const details = document.createElement('div');
+              details.className = 'details';
+              const label = document.createElement('span');
+              label.textContent = step;
+              const value = document.createElement('span');
+              value.className = 'value';
+              value.textContent = token.$value;
+              details.append(label, value);
+
+              card.append(sample, details);
+              swatches.append(card);
+            }
+
+            section.append(heading, swatches);
+            palette.append(section);
+          }
+        })
+        .catch((error) => {
+          status.textContent = `${error.message} Open this page through a local HTTP server to allow it to read the token JSON.`;
+        });
+    </script>
+  </body>
+</html>

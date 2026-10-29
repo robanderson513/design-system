@@ -2,8 +2,12 @@
   "name": "@robanderson513/tokens",
   "version": "0.1.0",
   "description": "Design tokens",
-  "files": ["dist"],
+  "files": ["dist", "tokens"],
   "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./primitives/colors": "./tokens/primitives/colors.json"
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   }
