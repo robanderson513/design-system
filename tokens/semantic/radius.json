@@ -1,0 +1,10 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "radius": {
+    "$type": "dimension",
+    "control": { "$value": "{borderRadius.md}" },
+    "card": { "$value": "{borderRadius.lg}" },
+    "overlay": { "$value": "{borderRadius.xl}" },
+    "pill": { "$value": "{borderRadius.full}" }
+  }
+}

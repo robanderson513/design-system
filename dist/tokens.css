@@ -1,0 +1,60 @@
+:root {
+  --color-primary: #0066cc;
+  --color-ai: #7e22ce;
+  --color-surface-default: #fafafa;
+  --color-surface-subtle: #f5f5f5;
+  --color-surface-inverse: #171717;
+  --color-text-primary: #171717;
+  --color-text-secondary: #404040;
+  --color-text-muted: #737373;
+  --color-text-inverse: #fafafa;
+  --color-border-default: #e5e5e5;
+  --color-border-strong: #a3a3a3;
+  --color-border-subtle: #f5f5f5;
+  --color-action-primary-default: #0066cc;
+  --color-action-primary-hover: #0053a8;
+  --color-action-secondary-default: #404040;
+  --color-action-secondary-hover: #171717;
+  --color-status-success-foreground: #15803d;
+  --color-status-success-surface: #f0fdf4;
+  --color-status-error-foreground: #b91c1c;
+  --color-status-error-surface: #fef2f2;
+  --color-status-warning-foreground: #854d0e;
+  --color-status-warning-surface: #fefce8;
+  --color-status-info-foreground: #0053a8;
+  --color-status-info-surface: #eaf3ff;
+
+  --spacing-gap-tight: 8px;
+  --spacing-gap-compact: 12px;
+  --spacing-gap-default: 16px;
+  --spacing-gap-relaxed: 24px;
+  --spacing-gap-section: 32px;
+  --spacing-padding-compact: 8px;
+  --spacing-padding-control: 12px;
+  --spacing-padding-card: 24px;
+  --spacing-padding-section: 32px;
+  --spacing-margin-element: 16px;
+  --spacing-margin-section: 32px;
+  --spacing-margin-page: 48px;
+
+  --typography-font-family-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --typography-font-family-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --typography-font-family-code: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  --typography-font-size-caption: 12px;
+  --typography-font-size-label: 14px;
+  --typography-font-size-body: 16px;
+  --typography-font-size-title: 24px;
+  --typography-font-size-heading: 30px;
+  --typography-font-size-display: 48px;
+  --typography-font-weight-body: 400;
+  --typography-font-weight-emphasis: 500;
+  --typography-font-weight-strong: 600;
+  --typography-line-height-body: 1.5;
+  --typography-line-height-heading: 1.25;
+  --typography-line-height-relaxed: 1.75;
+
+  --radius-control: 4px;
+  --radius-card: 8px;
+  --radius-overlay: 12px;
+  --radius-pill: 9999px;
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Design token color preview</title>
+    <title>Semantic color token preview</title>
     <style>
       :root {
         color-scheme: light;
@@ -68,8 +68,8 @@
   </head>
   <body>
     <header>
-      <h1>Color primitives</h1>
-      <p class="intro">Neutral, blue, green, red, yellow, and purple color ramps loaded from <code>tokens/primitives/colors.json</code>.</p>
+      <h1>Semantic colors</h1>
+      <p class="intro">Color roles backed by the internal ramps in <code>tokens/primitives/colors.json</code>.</p>
     </header>
     <main id="palette" aria-live="polite"></main>
     <p id="status" role="status"></p>
@@ -78,53 +78,64 @@
       const palette = document.querySelector('#palette');
       const status = document.querySelector('#status');
 
-      fetch('./tokens/primitives/colors.json')
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Could not load tokens (${response.status}).`);
+      Promise.all([
+        fetch('./tokens/semantic/colors.json'),
+        fetch('./tokens/primitives/colors.json')
+      ])
+        .then(async ([semanticResponse, primitiveResponse]) => {
+          if (!semanticResponse.ok || !primitiveResponse.ok) {
+            throw new Error(`Could not load tokens (${semanticResponse.status}, ${primitiveResponse.status}).`);
           }
-          return response.json();
+          return Promise.all([semanticResponse.json(), primitiveResponse.json()]);
         })
-        .then(({ color }) => {
-          for (const [name, scale] of Object.entries(color)) {
-            if (name.startsWith('$')) continue;
+        .then(([{ color }, primitives]) => {
+          const resolveColor = (value) => {
+            const path = value.slice(1, -1).split('.');
+            const token = path.reduce((current, key) => current && current[key], primitives);
+            if (!token || !Object.prototype.hasOwnProperty.call(token, '$value')) {
+              throw new Error(`Unable to resolve semantic color: ${value}`);
+            }
+            return token.$value;
+          };
 
-            const section = document.createElement('section');
-            section.className = 'scale';
-
-            const heading = document.createElement('h2');
-            heading.textContent = `${name[0].toUpperCase()}${name.slice(1)}`;
-
-            const swatches = document.createElement('div');
-            swatches.className = 'swatches';
-
-            for (const [step, token] of Object.entries(scale)) {
-              if (step.startsWith('$')) continue;
-
+          const renderToken = (name, token) => {
+            if (token && Object.prototype.hasOwnProperty.call(token, '$value')) {
+              const value = resolveColor(token.$value);
               const card = document.createElement('article');
               card.className = 'swatch';
 
               const sample = document.createElement('div');
               sample.className = 'color';
-              sample.style.backgroundColor = token.$value;
-              sample.setAttribute('aria-label', `${name} ${step}: ${token.$value}`);
+              sample.style.backgroundColor = value;
+              sample.setAttribute('aria-label', `${name}: ${value}`);
 
               const details = document.createElement('div');
               details.className = 'details';
               const label = document.createElement('span');
-              label.textContent = step;
-              const value = document.createElement('span');
-              value.className = 'value';
-              value.textContent = token.$value;
-              details.append(label, value);
+              label.textContent = name;
+              const colorValue = document.createElement('span');
+              colorValue.className = 'value';
+              colorValue.textContent = value;
+              details.append(label, colorValue);
 
               card.append(sample, details);
               swatches.append(card);
+              return;
             }
 
-            section.append(heading, swatches);
-            palette.append(section);
-          }
+            for (const [key, value] of Object.entries(token)) {
+              if (!key.startsWith('$')) renderToken(name ? `${name}.${key}` : key, value);
+            }
+          };
+
+          const swatches = document.createElement('div');
+          swatches.className = 'swatches';
+          renderToken('', color);
+
+          const section = document.createElement('section');
+          section.className = 'scale';
+          section.append(swatches);
+          palette.append(section);
         })
         .catch((error) => {
           status.textContent = `${error.message} Open this page through a local HTTP server to allow it to read the token JSON.`;

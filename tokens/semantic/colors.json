@@ -1,0 +1,52 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "$type": "color",
+    "primary": { "$value": "{color.blue.600}" },
+    "ai": { "$value": "{color.purple.700}" },
+    "surface": {
+      "default": { "$value": "{color.neutral.50}" },
+      "subtle": { "$value": "{color.neutral.100}" },
+      "inverse": { "$value": "{color.neutral.900}" }
+    },
+    "text": {
+      "primary": { "$value": "{color.neutral.900}" },
+      "secondary": { "$value": "{color.neutral.700}" },
+      "muted": { "$value": "{color.neutral.500}" },
+      "inverse": { "$value": "{color.neutral.50}" }
+    },
+    "border": {
+      "default": { "$value": "{color.neutral.200}" },
+      "strong": { "$value": "{color.neutral.400}" },
+      "subtle": { "$value": "{color.neutral.100}" }
+    },
+    "action": {
+      "primary": {
+        "default": { "$value": "{color.blue.600}" },
+        "hover": { "$value": "{color.blue.700}" }
+      },
+      "secondary": {
+        "default": { "$value": "{color.neutral.700}" },
+        "hover": { "$value": "{color.neutral.900}" }
+      }
+    },
+    "status": {
+      "success": {
+        "foreground": { "$value": "{color.green.700}" },
+        "surface": { "$value": "{color.green.50}" }
+      },
+      "error": {
+        "foreground": { "$value": "{color.red.700}" },
+        "surface": { "$value": "{color.red.50}" }
+      },
+      "warning": {
+        "foreground": { "$value": "{color.yellow.800}" },
+        "surface": { "$value": "{color.yellow.50}" }
+      },
+      "info": {
+        "foreground": { "$value": "{color.blue.700}" },
+        "surface": { "$value": "{color.blue.50}" }
+      }
+    }
+  }
+}
