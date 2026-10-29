@@ -1,36 +1,37 @@
 # Design tokens
 
-A platform-neutral source of design tokens, starting with color primitives that can be shared by apps and design tools. Token source files use the W3C Design Tokens Community Group format.
+A platform-neutral design-token library for sharing design decisions across apps and tools. Tokens use the W3C Design Tokens Community Group (DTCG) JSON format.
 
-## Color primitives
+## What's inside
 
-The initial palette contains six named ramps—neutral, blue, green, red, yellow, and purple—with steps `50` through `950`. Lighter steps are generally tints and darker steps are generally shades; the numbers are scale labels, not guaranteed contrast levels. The ramps do not include pure white or pure black.
+- **Color primitives:** neutral, blue, green, red, yellow, and purple ramps, each with steps from `50` to `950`. These are foundational values, not role-specific choices or contrast guarantees.
+- **Package entry point:** a CommonJS export for JavaScript consumers, plus a direct JSON export for tools that read DTCG tokens.
+- **Color preview:** [`preview.html`](preview.html) displays the available ramps from the source JSON.
 
-The source of truth is [`tokens/primitives/colors.json`](tokens/primitives/colors.json). The CommonJS package entry point exposes these values in JavaScript. For compatibility, `color.primary` remains an alias for `color.blue.600`; new code should refer to a named primitive instead.
+The source of truth for colors is [`tokens/primitives/colors.json`](tokens/primitives/colors.json). Semantic tokens for roles such as text, surfaces, links, and focus are not defined yet.
 
-## Using the package
+## Using the tokens
+
+Configure npm to use the GitHub Packages registry for this package, then install it:
+
+```sh
+npm install @robanderson513/tokens
+```
+
+In CommonJS, access a color value like this:
 
 ```js
 const tokens = require('@robanderson513/tokens');
 
 const blue = tokens.color.blue['600'].$value;
-const neutral = tokens.color.neutral['50'].$value;
 ```
 
-Tools that consume DTCG JSON can import the source file directly:
+Tools that consume DTCG JSON can use the `@robanderson513/tokens/primitives/colors` package export.
 
-```js
-import colors from '@robanderson513/tokens/primitives/colors' with { type: 'json' };
-```
+## Previewing the palette
 
-## Preview
-
-[`preview.html`](preview.html) displays every color ramp and its hex values, reading directly from the token JSON. Serve the repository root over a local HTTP server and open `preview.html`; opening it directly as a `file://` URL may prevent the browser from loading the JSON.
+Serve the repository root with a local HTTP server and open `preview.html`. The page loads the token JSON directly, so opening it as a `file://` URL may prevent the palette from loading.
 
 ## Accessibility
 
-Primitive colors are not accessibility guarantees by themselves. Check foreground and background colors as pairs in their intended context. WCAG AA contrast guidance calls for at least `4.5:1` for normal text and `3:1` for large text; meaningful non-text UI indicators generally need `3:1` against adjacent colors. Do not rely on color alone to communicate meaning.
-
-For example, blue `500` (`#1474df`) has a contrast ratio of `4.38:1` on neutral `50` (`#fafafa`), just below the normal-text AA threshold; blue `600` (`#0066cc`) is `5.33:1` on that background. These are example pair checks, not a complete accessibility certification of the palette.
-
-Semantic tokens for roles such as text, surfaces, links, and focus indicators can be introduced as a separate layer and checked against their intended pairings.
+Primitive colors do not guarantee accessible combinations. Check foreground and background pairs in their intended context against applicable contrast guidance, and do not rely on color alone to convey meaning.
