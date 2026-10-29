@@ -6,7 +6,10 @@
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./primitives/colors": "./tokens/primitives/colors.json"
+    "./primitives/colors": "./tokens/primitives/colors.json",
+    "./primitives/spacing": "./tokens/primitives/spacing.json",
+    "./primitives/typography": "./tokens/primitives/typography.json",
+    "./primitives/radii": "./tokens/primitives/radii.json"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
