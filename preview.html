@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Light and dark color token preview</title>
+    <title>Design system color token preview</title>
     <style>
       :root {
         font-family: system-ui, sans-serif;
@@ -31,6 +31,22 @@
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr));
         gap: 24px;
         margin-top: 36px;
+      }
+
+      #controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      #controls label {
+        display: grid;
+        gap: 6px;
+      }
+
+      #primitives {
+        margin-top: 40px;
       }
 
       .theme-preview {
@@ -87,15 +103,38 @@
   </head>
   <body>
     <header>
-      <h1>Theme colors</h1>
-      <p class="intro">Light and dark semantic roles and interaction states, backed by <code>tokens/primitives/colors.json</code>.</p>
+      <h1>Color tokens</h1>
+      <p class="intro">Inspect primitive color ramps and resolved semantic roles for each brand and appearance.</p>
     </header>
-    <main id="palette" aria-live="polite"></main>
+    <main>
+      <div id="controls">
+        <label>Brand
+          <select id="brand">
+            <option value="default">Default</option>
+            <option value="recipe">Recipe</option>
+          </select>
+        </label>
+        <label>Appearance
+          <select id="appearance">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
+      </div>
+      <div id="palette" aria-live="polite"></div>
+      <section id="primitives" aria-labelledby="primitive-heading">
+        <h2 id="primitive-heading">Primitive ramps</h2>
+        <div id="primitive-palette" class="swatches"></div>
+      </section>
+    </main>
     <p id="status" role="status"></p>
 
     <script>
       const palette = document.querySelector('#palette');
+      const primitivePalette = document.querySelector('#primitive-palette');
       const status = document.querySelector('#status');
+      const brandSelect = document.querySelector('#brand');
+      const appearanceSelect = document.querySelector('#appearance');
 
       Promise.all([
         fetch('./tokens/semantic/colors.json'),
@@ -117,13 +156,10 @@
             return token.$value;
           };
 
-          const renderToken = (name, token, swatches, theme) => {
-            if (token && Object.prototype.hasOwnProperty.call(token, '$value')) {
-              const value = resolveColor(token.$value);
+          const renderSwatch = (name, value, swatches, textColor, borderColor) => {
               const card = document.createElement('article');
               card.className = 'swatch';
-              card.style.borderColor = resolveColor(theme.border.default.$value);
-              card.style.backgroundColor = resolveColor(theme.surface.default.$value);
+              card.style.borderColor = borderColor;
 
               const sample = document.createElement('div');
               sample.className = 'color';
@@ -132,43 +168,82 @@
 
               const details = document.createElement('div');
               details.className = 'details';
-              details.style.color = resolveColor(theme.text.primary.$value);
+              details.style.color = textColor;
               const label = document.createElement('span');
               label.textContent = name;
               const colorValue = document.createElement('span');
               colorValue.className = 'value';
-              colorValue.style.color = resolveColor(theme.text.secondary.$value);
+              colorValue.style.color = textColor;
               colorValue.textContent = value;
               details.append(label, colorValue);
 
               card.append(sample, details);
               swatches.append(card);
-              return;
-            }
-
-            for (const [key, value] of Object.entries(token)) {
-              if (!key.startsWith('$')) renderToken(name ? `${name}.${key}` : key, value, swatches, theme);
-            }
           };
 
-          for (const [themeName, theme] of Object.entries(color.theme)) {
+          for (const [family, ramp] of Object.entries(primitives.color)) {
+            if (family.startsWith('$')) continue;
+            const heading = document.createElement('h3');
+            heading.textContent = family;
+            const section = document.createElement('section');
+            section.append(heading);
+            const swatches = document.createElement('div');
+            swatches.className = 'swatches';
+            for (const [shade, token] of Object.entries(ramp)) {
+              renderSwatch(`${family}.${shade}`, token.$value, swatches, '#172033', '#cbd5e1');
+            }
+            section.append(swatches);
+            primitivePalette.append(section);
+          }
+
+          const mergeTheme = (base, overrides) => {
+            const result = { ...base };
+            for (const [key, value] of Object.entries(overrides || {})) {
+              result[key] = value && typeof value === 'object' && !('$value' in value)
+                ? mergeTheme(base[key] || {}, value)
+                : value;
+            }
+            return result;
+          };
+
+          const renderTheme = () => {
+            palette.replaceChildren();
+            const appearance = appearanceSelect.value;
+            const brand = brandSelect.value;
+            const sharedTheme = color.theme[appearance];
+            const brandTheme = brand === 'default' ? {} : color.brand[brand][appearance];
+            const theme = mergeTheme(sharedTheme, brandTheme);
             const section = document.createElement('section');
             section.className = 'theme-preview';
-            section.setAttribute('aria-labelledby', `theme-${themeName}`);
+            section.setAttribute('aria-labelledby', `theme-${brand}-${appearance}`);
             section.style.backgroundColor = resolveColor(theme.surface.default.$value);
             section.style.color = resolveColor(theme.text.primary.$value);
             section.style.borderColor = resolveColor(theme.border.default.$value);
 
             const heading = document.createElement('h2');
-            heading.id = `theme-${themeName}`;
-            heading.textContent = `${themeName[0].toUpperCase()}${themeName.slice(1)} theme`;
+            heading.id = `theme-${brand}-${appearance}`;
+            heading.textContent = `${brand[0].toUpperCase()}${brand.slice(1)} · ${appearance} semantic roles`;
 
             const swatches = document.createElement('div');
             swatches.className = 'swatches';
-            renderToken('', theme, swatches, theme);
+            const flatten = (name, token) => {
+              if (token && Object.prototype.hasOwnProperty.call(token, '$value')) {
+                renderSwatch(name, resolveColor(token.$value), swatches,
+                  resolveColor(theme.text.primary.$value), resolveColor(theme.border.default.$value));
+                return;
+              }
+              for (const [key, value] of Object.entries(token)) {
+                if (!key.startsWith('$')) flatten(name ? `${name}.${key}` : key, value);
+              }
+            };
+            flatten('', theme);
             section.append(heading, swatches);
             palette.append(section);
-          }
+          };
+
+          brandSelect.addEventListener('change', renderTheme);
+          appearanceSelect.addEventListener('change', renderTheme);
+          renderTheme();
         })
         .catch((error) => {
           status.textContent = `${error.message} Open this page through a local HTTP server to allow it to read the token JSON.`;

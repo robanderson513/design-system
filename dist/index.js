@@ -20,11 +20,13 @@ const lightTheme = {
   action: {
     primary: {
       default: '#0066cc',
-      hover: '#0053a8'
+      hover: '#0053a8',
+      text: '#fafafa'
     },
     secondary: {
       default: '#404040',
-      hover: '#171717'
+      hover: '#171717',
+      text: '#fafafa'
     }
   },
   status: {
@@ -76,11 +78,13 @@ const darkTheme = {
   action: {
     primary: {
       default: '#3f8df2',
-      hover: '#75adff'
+      hover: '#75adff',
+      text: '#0a0a0a'
     },
     secondary: {
       default: '#d4d4d4',
-      hover: '#fafafa'
+      hover: '#fafafa',
+      text: '#0a0a0a'
     }
   },
   status: {
@@ -110,12 +114,54 @@ const darkTheme = {
   }
 };
 
+const recipeLightTheme = {
+  primary: '#78947A',
+  secondary: '#C77F61',
+  tertiary: '#C8AC62',
+  surface: { default: '#FAF9F5', subtle: '#F2F0E9', inverse: '#30312C' },
+  text: { primary: '#30312C', secondary: '#48463F', muted: '#656156', inverse: '#FAF9F5' },
+  border: { default: '#E6E3D9', strong: '#BEB9AA', subtle: '#F2F0E9' },
+  action: {
+    primary: { default: '#4D674F', hover: '#3B503D', text: '#fafafa' },
+    secondary: { default: '#754432', hover: '#573326', text: '#fafafa' }
+  },
+  state: {
+    hover: { foreground: '#3B503D', surface: '#F2F5F0', border: '#CCD9C8' },
+    pressed: { foreground: '#2B3B2D', surface: '#E5EBE1', border: '#B0C3AB' },
+    selected: { foreground: '#3B503D', surface: '#F2F5F0', border: '#617B63' }
+  }
+};
+
+const recipeDarkTheme = {
+  primary: '#B0C3AB',
+  secondary: '#DDB09A',
+  tertiary: '#DDCB91',
+  surface: { default: '#1C1D19', subtle: '#30312C', inverse: '#F2F0E9' },
+  text: { primary: '#FAF9F5', secondary: '#E6E3D9', muted: '#BEB9AA', inverse: '#30312C' },
+  border: { default: '#656156', strong: '#A29D8F', subtle: '#48463F' },
+  action: {
+    primary: { default: '#B0C3AB', hover: '#CCD9C8', text: '#2B3B2D' },
+    secondary: { default: '#DDB09A', hover: '#EACDBD', text: '#30312C' }
+  },
+  state: {
+    hover: { foreground: '#FAF9F5', surface: '#48463F', border: '#656156' },
+    pressed: { foreground: '#FAF9F5', surface: '#656156', border: '#827D70' },
+    selected: { foreground: '#CCD9C8', surface: '#1B291D', border: '#78947A' }
+  }
+};
+
 const color = {
   primary: '#0066cc',
   ai: '#7e22ce',
   theme: {
     light: lightTheme,
     dark: darkTheme
+  },
+  brand: {
+    recipe: {
+      light: recipeLightTheme,
+      dark: recipeDarkTheme
+    }
   },
   surface: lightTheme.surface,
   text: lightTheme.text,
