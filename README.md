@@ -29,12 +29,12 @@ This layer is designed to make app styling more consistent and easier to reason 
 ### CSS variables and shared utility classes
 The package also ships CSS custom properties and shared utility classes so apps can consume the design system directly in CSS.
 
-- `@robanderson513/tokens/css` exposes CSS custom properties such as `--color-primary` and `--spacing-gap-default`
-- `@robanderson513/tokens/common` exposes shared utility classes such as `.flex`, `.gap-default`, `.p-card`, `.font-heading`, and `.text-body`
+- `@robanderson513/tokens/css` exposes CSS custom properties such as `--color-primary` and `--spacing-gap-default`, along with the base `html` and `body` foundation styles to establish typography, color inheritance, and text rendering
+- `@robanderson513/tokens/common` exposes shared utility classes such as `.flex`, `.gap-default`, `.p-card`, `.font-heading`, `.text-body`, `.rounded-card`, `.border`, and `.text-center`
 - Setting `data-theme="dark"` on an element switches its semantic color and focus-ring variables to dark values; the default is light
 - Opt-in `.focus-ring` and `.state-*` utilities provide `:focus-visible` and common interaction-state styles
 
-These utilities are meant to provide a lightweight baseline for layout and typography, while still allowing apps to layer in their own styling.
+These utilities are meant to provide a lightweight baseline for layout, spacing, typography, and primitive surface styling while still allowing apps to layer in their own styling.
 
 ## Package structure
 
