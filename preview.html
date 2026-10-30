@@ -3,17 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Semantic color token preview</title>
+    <title>Light and dark color token preview</title>
     <style>
       :root {
-        color-scheme: light;
         font-family: system-ui, sans-serif;
         background: #f8fafc;
         color: #172033;
       }
 
       body {
-        max-width: 1100px;
+        max-width: 1280px;
         margin: 0 auto;
         padding: 48px 24px;
       }
@@ -27,49 +26,69 @@
         color: #526174;
       }
 
-      .scale {
+      #palette {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr));
+        gap: 24px;
         margin-top: 36px;
+      }
+
+      .theme-preview {
+        padding: 24px;
+        border: 1px solid;
+        border-radius: 12px;
+      }
+
+      .theme-preview h2 {
+        margin-top: 0;
       }
 
       .swatches {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
       }
 
       .swatch {
         overflow: hidden;
-        border: 1px solid #dce2ea;
-        border-radius: 10px;
-        background: white;
+        border: 1px solid;
+        border-radius: 8px;
       }
 
       .color {
-        min-height: 100px;
+        min-height: 72px;
       }
 
       .details {
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
+        display: grid;
+        gap: 4px;
         padding: 12px;
         font-size: 14px;
       }
 
       .value {
-        color: #526174;
         font-family: ui-monospace, monospace;
       }
 
       #status {
         color: #9b1c1c;
       }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 24px 16px;
+        }
+
+        .theme-preview {
+          padding: 16px;
+        }
+      }
     </style>
   </head>
   <body>
     <header>
-      <h1>Semantic colors</h1>
-      <p class="intro">Color roles backed by the internal ramps in <code>tokens/primitives/colors.json</code>.</p>
+      <h1>Theme colors</h1>
+      <p class="intro">Light and dark semantic roles and interaction states, backed by <code>tokens/primitives/colors.json</code>.</p>
     </header>
     <main id="palette" aria-live="polite"></main>
     <p id="status" role="status"></p>
@@ -98,11 +117,13 @@
             return token.$value;
           };
 
-          const renderToken = (name, token) => {
+          const renderToken = (name, token, swatches, theme) => {
             if (token && Object.prototype.hasOwnProperty.call(token, '$value')) {
               const value = resolveColor(token.$value);
               const card = document.createElement('article');
               card.className = 'swatch';
+              card.style.borderColor = resolveColor(theme.border.default.$value);
+              card.style.backgroundColor = resolveColor(theme.surface.default.$value);
 
               const sample = document.createElement('div');
               sample.className = 'color';
@@ -111,10 +132,12 @@
 
               const details = document.createElement('div');
               details.className = 'details';
+              details.style.color = resolveColor(theme.text.primary.$value);
               const label = document.createElement('span');
               label.textContent = name;
               const colorValue = document.createElement('span');
               colorValue.className = 'value';
+              colorValue.style.color = resolveColor(theme.text.secondary.$value);
               colorValue.textContent = value;
               details.append(label, colorValue);
 
@@ -124,18 +147,28 @@
             }
 
             for (const [key, value] of Object.entries(token)) {
-              if (!key.startsWith('$')) renderToken(name ? `${name}.${key}` : key, value);
+              if (!key.startsWith('$')) renderToken(name ? `${name}.${key}` : key, value, swatches, theme);
             }
           };
 
-          const swatches = document.createElement('div');
-          swatches.className = 'swatches';
-          renderToken('', color);
+          for (const [themeName, theme] of Object.entries(color.theme)) {
+            const section = document.createElement('section');
+            section.className = 'theme-preview';
+            section.setAttribute('aria-labelledby', `theme-${themeName}`);
+            section.style.backgroundColor = resolveColor(theme.surface.default.$value);
+            section.style.color = resolveColor(theme.text.primary.$value);
+            section.style.borderColor = resolveColor(theme.border.default.$value);
 
-          const section = document.createElement('section');
-          section.className = 'scale';
-          section.append(swatches);
-          palette.append(section);
+            const heading = document.createElement('h2');
+            heading.id = `theme-${themeName}`;
+            heading.textContent = `${themeName[0].toUpperCase()}${themeName.slice(1)} theme`;
+
+            const swatches = document.createElement('div');
+            swatches.className = 'swatches';
+            renderToken('', theme, swatches, theme);
+            section.append(heading, swatches);
+            palette.append(section);
+          }
         })
         .catch((error) => {
           status.textContent = `${error.message} Open this page through a local HTTP server to allow it to read the token JSON.`;

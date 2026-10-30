@@ -18,7 +18,8 @@ Primitive tokens are the underlying source values from which higher-level decisi
 These are the role-based values apps should consume for common UI concepts.
 
 Examples include:
-- color roles such as primary actions, surfaces, text, borders, and status colors
+- light and dark color roles for actions, surfaces, text, borders, and status colors
+- interaction-state colors for hover, pressed, disabled, selected, and invalid controls
 - spacing scales for layout and component spacing
 - typography scales for standard text treatments
 - radius values for common UI surfaces
@@ -26,10 +27,12 @@ Examples include:
 This layer is designed to make app styling more consistent and easier to reason about.
 
 ### CSS variables and shared utility classes
-The package also ships generated CSS output so apps can consume the design system directly in CSS.
+The package also ships CSS custom properties and shared utility classes so apps can consume the design system directly in CSS.
 
 - `@robanderson513/tokens/css` exposes CSS custom properties such as `--color-primary` and `--spacing-gap-default`
 - `@robanderson513/tokens/common` exposes shared utility classes such as `.flex`, `.gap-default`, `.p-card`, `.font-heading`, and `.text-body`
+- Setting `data-theme="dark"` on an element switches its semantic color and focus-ring variables to dark values; the default is light
+- Opt-in `.focus-ring` and `.state-*` utilities provide `:focus-visible` and common interaction-state styles
 
 These utilities are meant to provide a lightweight baseline for layout and typography, while still allowing apps to layer in their own styling.
 
@@ -68,6 +71,8 @@ const bodySize = tokens.typography.fontSize.body;
 ### CSS usage
 
 ```css
+@import '@robanderson513/tokens/css';
+
 .card {
   background: var(--color-surface-default);
   color: var(--color-text-primary);
@@ -75,6 +80,17 @@ const bodySize = tokens.typography.fontSize.body;
   border-radius: var(--radius-card);
 }
 ```
+
+For dark mode, add `data-theme="dark"` to the document or a containing element. The existing semantic variables (for example `--color-surface-default`) then resolve to dark values. State utilities use semantic state tokens and ARIA/native disabled attributes:
+
+```html
+<button class="focus-ring state-hover state-pressed" type="button">Action</button>
+<button class="focus-ring state-disabled" type="button" disabled>Unavailable</button>
+<div class="state-selected" aria-selected="true">Selected item</div>
+<input class="focus-ring state-invalid" aria-invalid="true">
+```
+
+`.focus-ring` adds a visible outline only for keyboard or other `:focus-visible` interaction. Consumers remain responsible for correct semantics, accessible names, and testing color contrast in their specific UI.
 
 ### Shared utility classes
 
