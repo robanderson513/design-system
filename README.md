@@ -7,7 +7,7 @@ A platform-neutral design system foundation for sharing visual decisions across 
 ### Primitive tokens
 These are the raw design values that form the base of the system.
 
-- color ramps for neutral, blue, green, red, yellow, purple, sage, terracotta, harvest, and stone
+- color ramps for neutral, blue, green, red, yellow, purple, sage, terracotta, harvest, stone, and clay
 - spacing values for gaps, padding, and margins
 - typography values for font families, sizes, weights, and line heights
 - radius values for controls, cards, overlays, and pills
@@ -19,7 +19,7 @@ These are the role-based values apps should consume for common UI concepts.
 
 Examples include:
 - shared light and dark color roles for actions, surfaces, text, borders, and status colors
-- optional brand overrides, including the recipe theme's botanical colors and warm stone surfaces
+- optional color palettes, including the earth palette's botanical accents and warm clay surfaces
 - interaction-state colors for hover, pressed, disabled, selected, and invalid controls
 - spacing scales for layout and component spacing
 - typography scales for standard text treatments
@@ -33,7 +33,7 @@ The package also ships CSS custom properties and shared utility classes so apps 
 - `@robanderson513/tokens/css` exposes CSS custom properties such as `--color-primary` and `--spacing-gap-default`, along with the base `html` and `body` foundation styles to establish typography, color inheritance, and text rendering
 - `@robanderson513/tokens/common` exposes shared utility classes such as `.flex`, `.gap-default`, `.p-card`, `.font-heading`, `.text-body`, `.rounded-card`, `.border`, and `.text-center`
 - Setting `data-theme="dark"` on an element switches its semantic color and focus-ring variables to dark values; the default is light
-- Setting `data-brand="recipe"` opts into the recipe palette independently of `data-theme`; its default appearance is light
+- Setting `data-palette="earth"` opts into the earth palette independently of `data-theme`; its default appearance is light
 - Opt-in `.focus-ring` and `.state-*` utilities provide `:focus-visible` and common interaction-state styles
 
 These utilities are meant to provide a lightweight baseline for layout, spacing, typography, and primitive surface styling while still allowing apps to layer in their own styling.
@@ -83,10 +83,10 @@ const bodySize = tokens.typography.fontSize.body;
 }
 ```
 
-For the recipe brand, set both attributes on the same document element. The same semantic variables (for example `--color-surface-default` and `--color-action-primary-default`) resolve to the recipe's selected appearance, while status colors remain shared:
+For the earth palette, set both attributes on the same document element. The same semantic variables (for example `--color-surface-default` and `--color-action-primary-default`) resolve to the selected appearance, while status colors remain shared:
 
 ```html
-<html data-brand="recipe" data-theme="dark">
+<html data-palette="earth" data-theme="dark">
 ```
 
 For the default brand, add only `data-theme="dark"` to the document or a containing element. State utilities use semantic state tokens and ARIA/native disabled attributes:

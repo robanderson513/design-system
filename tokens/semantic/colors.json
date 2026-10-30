@@ -160,27 +160,27 @@
         }
       }
     },
-    "brand": {
-      "recipe": {
+    "palette": {
+      "earth": {
         "light": {
           "primary": { "$value": "{color.sage.500}" },
           "secondary": { "$value": "{color.terracotta.500}" },
           "tertiary": { "$value": "{color.harvest.500}" },
           "surface": {
-            "default": { "$value": "{color.stone.50}" },
-            "subtle": { "$value": "{color.stone.100}" },
-            "inverse": { "$value": "{color.stone.900}" }
+            "default": { "$value": "{color.clay.50}" },
+            "subtle": { "$value": "{color.clay.100}" },
+            "inverse": { "$value": "{color.clay.900}" }
           },
           "text": {
-            "primary": { "$value": "{color.stone.900}" },
-            "secondary": { "$value": "{color.stone.800}" },
-            "muted": { "$value": "{color.stone.700}" },
-            "inverse": { "$value": "{color.stone.50}" }
+            "primary": { "$value": "{color.clay.900}" },
+            "secondary": { "$value": "{color.clay.800}" },
+            "muted": { "$value": "{color.clay.700}" },
+            "inverse": { "$value": "{color.clay.50}" }
           },
           "border": {
-            "default": { "$value": "{color.stone.200}" },
-            "strong": { "$value": "{color.stone.400}" },
-            "subtle": { "$value": "{color.stone.100}" }
+            "default": { "$value": "{color.clay.200}" },
+            "strong": { "$value": "{color.clay.400}" },
+            "subtle": { "$value": "{color.clay.100}" }
           },
           "action": {
             "primary": {
@@ -217,20 +217,20 @@
           "secondary": { "$value": "{color.terracotta.300}" },
           "tertiary": { "$value": "{color.harvest.300}" },
           "surface": {
-            "default": { "$value": "{color.stone.950}" },
-            "subtle": { "$value": "{color.stone.900}" },
-            "inverse": { "$value": "{color.stone.100}" }
+            "default": { "$value": "{color.clay.950}" },
+            "subtle": { "$value": "{color.clay.900}" },
+            "inverse": { "$value": "{color.clay.100}" }
           },
           "text": {
-            "primary": { "$value": "{color.stone.50}" },
-            "secondary": { "$value": "{color.stone.200}" },
-            "muted": { "$value": "{color.stone.400}" },
-            "inverse": { "$value": "{color.stone.900}" }
+            "primary": { "$value": "{color.clay.50}" },
+            "secondary": { "$value": "{color.clay.200}" },
+            "muted": { "$value": "{color.clay.400}" },
+            "inverse": { "$value": "{color.clay.900}" }
           },
           "border": {
-            "default": { "$value": "{color.stone.700}" },
-            "strong": { "$value": "{color.stone.500}" },
-            "subtle": { "$value": "{color.stone.800}" }
+            "default": { "$value": "{color.clay.700}" },
+            "strong": { "$value": "{color.clay.500}" },
+            "subtle": { "$value": "{color.clay.800}" }
           },
           "action": {
             "primary": {
@@ -241,19 +241,19 @@
             "secondary": {
               "default": { "$value": "{color.terracotta.300}" },
               "hover": { "$value": "{color.terracotta.200}" },
-              "text": { "$value": "{color.stone.900}" }
+              "text": { "$value": "{color.clay.900}" }
             }
           },
           "state": {
             "hover": {
-              "foreground": { "$value": "{color.stone.50}" },
-              "surface": { "$value": "{color.stone.800}" },
-              "border": { "$value": "{color.stone.700}" }
+              "foreground": { "$value": "{color.clay.50}" },
+              "surface": { "$value": "{color.clay.800}" },
+              "border": { "$value": "{color.clay.700}" }
             },
             "pressed": {
-              "foreground": { "$value": "{color.stone.50}" },
-              "surface": { "$value": "{color.stone.700}" },
-              "border": { "$value": "{color.stone.600}" }
+              "foreground": { "$value": "{color.clay.50}" },
+              "surface": { "$value": "{color.clay.700}" },
+              "border": { "$value": "{color.clay.600}" }
             },
             "selected": {
               "foreground": { "$value": "{color.sage.200}" },

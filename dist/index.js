@@ -114,13 +114,13 @@ const darkTheme = {
   }
 };
 
-const recipeLightTheme = {
+const earthLightTheme = {
   primary: '#78947A',
   secondary: '#C77F61',
   tertiary: '#C8AC62',
-  surface: { default: '#FAF9F5', subtle: '#F2F0E9', inverse: '#30312C' },
-  text: { primary: '#30312C', secondary: '#48463F', muted: '#656156', inverse: '#FAF9F5' },
-  border: { default: '#E6E3D9', strong: '#BEB9AA', subtle: '#F2F0E9' },
+  surface: { default: '#F7EDE6', subtle: '#F0E1D6', inverse: '#302620' },
+  text: { primary: '#302620', secondary: '#49372F', muted: '#694D3F', inverse: '#F7EDE6' },
+  border: { default: '#E5CFC0', strong: '#C19B83', subtle: '#F0E1D6' },
   action: {
     primary: { default: '#4D674F', hover: '#3B503D', text: '#fafafa' },
     secondary: { default: '#754432', hover: '#573326', text: '#fafafa' }
@@ -132,20 +132,20 @@ const recipeLightTheme = {
   }
 };
 
-const recipeDarkTheme = {
+const earthDarkTheme = {
   primary: '#B0C3AB',
   secondary: '#DDB09A',
   tertiary: '#DDCB91',
-  surface: { default: '#1C1D19', subtle: '#30312C', inverse: '#F2F0E9' },
-  text: { primary: '#FAF9F5', secondary: '#E6E3D9', muted: '#BEB9AA', inverse: '#30312C' },
-  border: { default: '#656156', strong: '#A29D8F', subtle: '#48463F' },
+  surface: { default: '#1D1713', subtle: '#302620', inverse: '#F0E1D6' },
+  text: { primary: '#F7EDE6', secondary: '#E5CFC0', muted: '#C19B83', inverse: '#302620' },
+  border: { default: '#694D3F', strong: '#A47C65', subtle: '#49372F' },
   action: {
     primary: { default: '#B0C3AB', hover: '#CCD9C8', text: '#2B3B2D' },
-    secondary: { default: '#DDB09A', hover: '#EACDBD', text: '#30312C' }
+    secondary: { default: '#DDB09A', hover: '#EACDBD', text: '#302620' }
   },
   state: {
-    hover: { foreground: '#FAF9F5', surface: '#48463F', border: '#656156' },
-    pressed: { foreground: '#FAF9F5', surface: '#656156', border: '#827D70' },
+    hover: { foreground: '#F7EDE6', surface: '#49372F', border: '#694D3F' },
+    pressed: { foreground: '#F7EDE6', surface: '#694D3F', border: '#87644F' },
     selected: { foreground: '#CCD9C8', surface: '#1B291D', border: '#78947A' }
   }
 };
@@ -157,10 +157,10 @@ const color = {
     light: lightTheme,
     dark: darkTheme
   },
-  brand: {
-    recipe: {
-      light: recipeLightTheme,
-      dark: recipeDarkTheme
+  palette: {
+    earth: {
+      light: earthLightTheme,
+      dark: earthDarkTheme
     }
   },
   surface: lightTheme.surface,
