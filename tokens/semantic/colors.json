@@ -160,8 +160,8 @@
         }
       }
     },
-    "brand": {
-      "recipe": {
+    "palette": {
+      "earth": {
         "light": {
           "primary": { "$value": "{color.sage.500}" },
           "secondary": { "$value": "{color.terracotta.500}" },

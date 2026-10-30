@@ -114,7 +114,7 @@ const darkTheme = {
   }
 };
 
-const recipeLightTheme = {
+const earthLightTheme = {
   primary: '#78947A',
   secondary: '#C77F61',
   tertiary: '#C8AC62',
@@ -132,7 +132,7 @@ const recipeLightTheme = {
   }
 };
 
-const recipeDarkTheme = {
+const earthDarkTheme = {
   primary: '#B0C3AB',
   secondary: '#DDB09A',
   tertiary: '#DDCB91',
@@ -157,10 +157,10 @@ const color = {
     light: lightTheme,
     dark: darkTheme
   },
-  brand: {
-    recipe: {
-      light: recipeLightTheme,
-      dark: recipeDarkTheme
+  palette: {
+    earth: {
+      light: earthLightTheme,
+      dark: earthDarkTheme
     }
   },
   surface: lightTheme.surface,

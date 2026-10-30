@@ -104,14 +104,14 @@
   <body>
     <header>
       <h1>Color tokens</h1>
-      <p class="intro">Inspect primitive color ramps and resolved semantic roles for each brand and appearance.</p>
+      <p class="intro">Inspect primitive color ramps and resolved semantic roles for each palette and appearance.</p>
     </header>
     <main>
       <div id="controls">
-        <label>Brand
-          <select id="brand">
+        <label>Palette
+          <select id="palette-select">
             <option value="default">Default</option>
-            <option value="recipe">Recipe</option>
+            <option value="earth">Earth</option>
           </select>
         </label>
         <label>Appearance
@@ -133,7 +133,7 @@
       const palette = document.querySelector('#palette');
       const primitivePalette = document.querySelector('#primitive-palette');
       const status = document.querySelector('#status');
-      const brandSelect = document.querySelector('#brand');
+      const paletteSelect = document.querySelector('#palette-select');
       const appearanceSelect = document.querySelector('#appearance');
 
       Promise.all([
@@ -209,20 +209,20 @@
           const renderTheme = () => {
             palette.replaceChildren();
             const appearance = appearanceSelect.value;
-            const brand = brandSelect.value;
+            const paletteName = paletteSelect.value;
             const sharedTheme = color.theme[appearance];
-            const brandTheme = brand === 'default' ? {} : color.brand[brand][appearance];
-            const theme = mergeTheme(sharedTheme, brandTheme);
+            const paletteTheme = paletteName === 'default' ? {} : color.palette[paletteName][appearance];
+            const theme = mergeTheme(sharedTheme, paletteTheme);
             const section = document.createElement('section');
             section.className = 'theme-preview';
-            section.setAttribute('aria-labelledby', `theme-${brand}-${appearance}`);
+            section.setAttribute('aria-labelledby', `theme-${paletteName}-${appearance}`);
             section.style.backgroundColor = resolveColor(theme.surface.default.$value);
             section.style.color = resolveColor(theme.text.primary.$value);
             section.style.borderColor = resolveColor(theme.border.default.$value);
 
             const heading = document.createElement('h2');
-            heading.id = `theme-${brand}-${appearance}`;
-            heading.textContent = `${brand[0].toUpperCase()}${brand.slice(1)} · ${appearance} semantic roles`;
+            heading.id = `theme-${paletteName}-${appearance}`;
+            heading.textContent = `${paletteName[0].toUpperCase()}${paletteName.slice(1)} · ${appearance} semantic roles`;
 
             const swatches = document.createElement('div');
             swatches.className = 'swatches';
@@ -241,7 +241,7 @@
             palette.append(section);
           };
 
-          brandSelect.addEventListener('change', renderTheme);
+          paletteSelect.addEventListener('change', renderTheme);
           appearanceSelect.addEventListener('change', renderTheme);
           renderTheme();
         })

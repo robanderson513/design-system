@@ -47,7 +47,7 @@ const resolveTree = (token) => {
   return Object.fromEntries(Object.entries(token).map(([key, value]) => [key, resolveTree(value)]));
 };
 
-test('recipe primitive ramps contain all requested shades', () => {
+test('earth palette primitive ramps contain all requested shades', () => {
   const expected = {
     sage: ['#F2F5F0', '#E5EBE1', '#CCD9C8', '#B0C3AB', '#91A98D', '#78947A', '#617B63', '#4D674F', '#3B503D', '#2B3B2D', '#1B291D'],
     terracotta: ['#FBF3EF', '#F5E5DC', '#EACDBD', '#DDB09A', '#D29477', '#C77F61', '#AE694D', '#92563F', '#754432', '#573326', '#3B241B'],
@@ -61,7 +61,7 @@ test('recipe primitive ramps contain all requested shades', () => {
   }
 });
 
-test('semantic color references resolve and recipe overrides are sparse', () => {
+test('semantic color references resolve and earth palette overrides are sparse', () => {
   const visit = (token) => {
     if (!token || typeof token !== 'object') return;
     if (Object.hasOwn(token, '$value')) {
@@ -72,10 +72,10 @@ test('semantic color references resolve and recipe overrides are sparse', () => 
   };
   visit(colors);
   for (const appearance of ['light', 'dark']) {
-    const recipe = colors.color.brand.recipe[appearance];
-    assert.equal(recipe.status, undefined);
-    assert.ok(recipe.primary.$value);
-    assert.ok(recipe.action.primary.text.$value);
+    const earth = colors.color.palette.earth[appearance];
+    assert.equal(earth.status, undefined);
+    assert.ok(earth.primary.$value);
+    assert.ok(earth.action.primary.text.$value);
     assert.ok(colors.color.theme[appearance].action.primary.text.$value);
   }
 });
@@ -99,20 +99,20 @@ test('CommonJS exports themes and accessibility focus tokens compatibly', () => 
   assert.notEqual(tokens.color.theme.light.surface.default, tokens.color.theme.dark.surface.default);
   assert.equal(tokens.accessibility.focus.ring.width, accessibility.accessibility.focus.ring.width.$value);
   assert.equal(tokens.accessibility.focus.ring.color.dark, '#75adff');
-  assert.equal(tokens.color.brand.recipe.light.primary, '#78947A');
-  assert.equal(tokens.color.brand.recipe.light.surface.default, '#F7EDE6');
-  assert.equal(tokens.color.brand.recipe.light.text.primary, '#302620');
-  assert.equal(tokens.color.brand.recipe.dark.surface.default, '#1D1713');
-  assert.equal(tokens.color.brand.recipe.light.action.primary.text, '#fafafa');
+  assert.equal(tokens.color.palette.earth.light.primary, '#78947A');
+  assert.equal(tokens.color.palette.earth.light.surface.default, '#F7EDE6');
+  assert.equal(tokens.color.palette.earth.light.text.primary, '#302620');
+  assert.equal(tokens.color.palette.earth.dark.surface.default, '#1D1713');
+  assert.equal(tokens.color.palette.earth.light.action.primary.text, '#fafafa');
 });
 
-test('recipe semantic values match CommonJS exports and CSS variables', () => {
+test('earth palette semantic values match CommonJS exports and CSS variables', () => {
   for (const appearance of ['light', 'dark']) {
-    const source = colors.color.brand.recipe[appearance];
-    assert.deepEqual(tokens.color.brand.recipe[appearance], resolveTree(source));
+    const source = colors.color.palette.earth[appearance];
+    assert.deepEqual(tokens.color.palette.earth[appearance], resolveTree(source));
     const checkCss = (token, path = []) => {
       if (Object.hasOwn(token, '$value')) {
-        const property = `--color-theme-recipe-${appearance}-${path.join('-')}`;
+        const property = `--color-palette-earth-${appearance}-${path.join('-')}`;
         assert.ok(css.includes(`${property}: ${resolveReference(token.$value)};`), `Missing or stale ${property}`);
         return;
       }
@@ -122,9 +122,9 @@ test('recipe semantic values match CommonJS exports and CSS variables', () => {
   }
 });
 
-test('recipe action text and body text meet WCAG AA contrast in both appearances', () => {
+test('earth palette action text and body text meet WCAG AA contrast in both appearances', () => {
   for (const appearance of ['light', 'dark']) {
-    const theme = tokens.color.brand.recipe[appearance];
+    const theme = tokens.color.palette.earth[appearance];
     assert.ok(contrastRatio(theme.action.primary.text, theme.action.primary.default) >= 4.5);
     assert.ok(contrastRatio(theme.action.secondary.text, theme.action.secondary.default) >= 4.5);
     for (const role of ['primary', 'secondary', 'muted']) {
@@ -135,8 +135,8 @@ test('recipe action text and body text meet WCAG AA contrast in both appearances
 
 test('CSS exports theme variables and opt-in accessible state utilities', () => {
   assert.match(css, /\[data-theme="dark"\]/);
-  assert.match(css, /\[data-brand="recipe"\]/);
-  assert.match(css, /--color-theme-recipe-dark-surface-default:/);
+  assert.match(css, /\[data-palette="earth"\]/);
+  assert.match(css, /--color-palette-earth-dark-surface-default:/);
   assert.match(css, /--color-action-primary-text:/);
   assert.match(css, /--color-theme-dark-state-invalid-surface:/);
   assert.match(css, /--focus-ring-color:/);
