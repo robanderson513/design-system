@@ -1,11 +1,53 @@
 @import './tokens.css';
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
 
 .inline-flex {
   display: inline-flex;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .flex-row,
@@ -191,6 +233,99 @@
 .my-element { margin-top: var(--spacing-margin-element); margin-bottom: var(--spacing-margin-element); }
 .my-section { margin-top: var(--spacing-margin-section); margin-bottom: var(--spacing-margin-section); }
 .my-page { margin-top: var(--spacing-margin-page); margin-bottom: var(--spacing-margin-page); }
+
+.bg-surface-default {
+  background-color: var(--color-surface-default);
+}
+
+.bg-surface-subtle {
+  background-color: var(--color-surface-subtle);
+}
+
+.bg-surface-inverse {
+  background-color: var(--color-surface-inverse);
+}
+
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-inverse {
+  color: var(--color-text-inverse);
+}
+
+.border {
+  border: 1px solid var(--color-border-default);
+}
+
+.border-subtle {
+  border: 1px solid var(--color-border-subtle);
+}
+
+.border-strong {
+  border: 1px solid var(--color-border-strong);
+}
+
+.border-none {
+  border: none;
+}
+
+.rounded,
+.rounded-control {
+  border-radius: var(--radius-control);
+}
+
+.rounded-card {
+  border-radius: var(--radius-card);
+}
+
+.rounded-overlay {
+  border-radius: var(--radius-overlay);
+}
+
+.rounded-pill {
+  border-radius: var(--radius-pill);
+}
+
+.shadow-none {
+  box-shadow: none;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px rgba(23, 23, 23, 0.08);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 12px rgba(23, 23, 23, 0.12);
+}
+
+.shadow-lg {
+  box-shadow: 0 12px 24px rgba(23, 23, 23, 0.16);
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
 
 .font-body {
   font-family: var(--typography-font-family-body);

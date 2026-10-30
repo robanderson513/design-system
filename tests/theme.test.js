@@ -39,3 +39,29 @@ test('CSS exports theme variables and opt-in accessible state utilities', () => 
     assert.ok(commonCss.includes(utility), `Expected CSS utility ${utility}`);
   }
 });
+
+test('CSS provides base foundation styles and reusable primitive utilities', () => {
+  for (const rule of [
+    'box-sizing: border-box;',
+    'font-family: var(--typography-font-family-body);',
+    'line-height: var(--typography-line-height-body);',
+    'color: var(--color-text-primary);',
+    'text-rendering: optimizeLegibility;'
+  ]) {
+    assert.ok(css.includes(rule), `Expected foundation rule ${rule}`);
+  }
+  for (const utility of [
+    '.flex {',
+    '.gap-default',
+    '.p-card',
+    '.m-element',
+    '.text-center',
+    '.border {',
+    '.rounded-card',
+    '.shadow-md',
+    '.hidden {',
+    '.invisible {'
+  ]) {
+    assert.ok(commonCss.includes(utility), `Expected common utility ${utility}`);
+  }
+});
