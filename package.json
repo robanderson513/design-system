@@ -1,6 +1,6 @@
 {
-  "name": "@robanderson513/tokens",
-  "version": "1.0.0",
+  "name": "@robanderson513/design-system",
+  "version": "1.0.1",
   "description": "Design tokens",
   "files": ["dist"],
   "main": "./dist/index.js",
