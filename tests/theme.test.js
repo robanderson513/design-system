@@ -52,7 +52,8 @@ test('recipe primitive ramps contain all requested shades', () => {
     sage: ['#F2F5F0', '#E5EBE1', '#CCD9C8', '#B0C3AB', '#91A98D', '#78947A', '#617B63', '#4D674F', '#3B503D', '#2B3B2D', '#1B291D'],
     terracotta: ['#FBF3EF', '#F5E5DC', '#EACDBD', '#DDB09A', '#D29477', '#C77F61', '#AE694D', '#92563F', '#754432', '#573326', '#3B241B'],
     harvest: ['#FAF7EC', '#F3EDD7', '#E9DDB6', '#DDCB91', '#D5BC7B', '#C8AC62', '#A98E4D', '#89723D', '#6B5831', '#504226', '#342B1A'],
-    stone: ['#FAF9F5', '#F2F0E9', '#E6E3D9', '#D5D1C5', '#BEB9AA', '#A29D8F', '#827D70', '#656156', '#48463F', '#30312C', '#1C1D19']
+    stone: ['#FAF9F5', '#F2F0E9', '#E6E3D9', '#D5D1C5', '#BEB9AA', '#A29D8F', '#827D70', '#656156', '#48463F', '#30312C', '#1C1D19'],
+    clay: ['#F7EDE6', '#F0E1D6', '#E5CFC0', '#D5B6A3', '#C19B83', '#A47C65', '#87644F', '#694D3F', '#49372F', '#302620', '#1D1713']
   };
   for (const [family, values] of Object.entries(expected)) {
     assert.deepEqual(Object.keys(primitives.color[family]), ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950']);
@@ -99,7 +100,9 @@ test('CommonJS exports themes and accessibility focus tokens compatibly', () => 
   assert.equal(tokens.accessibility.focus.ring.width, accessibility.accessibility.focus.ring.width.$value);
   assert.equal(tokens.accessibility.focus.ring.color.dark, '#75adff');
   assert.equal(tokens.color.brand.recipe.light.primary, '#78947A');
-  assert.equal(tokens.color.brand.recipe.dark.surface.default, '#1C1D19');
+  assert.equal(tokens.color.brand.recipe.light.surface.default, '#F7EDE6');
+  assert.equal(tokens.color.brand.recipe.light.text.primary, '#302620');
+  assert.equal(tokens.color.brand.recipe.dark.surface.default, '#1D1713');
   assert.equal(tokens.color.brand.recipe.light.action.primary.text, '#fafafa');
 });
 

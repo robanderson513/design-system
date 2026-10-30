@@ -7,7 +7,7 @@ A platform-neutral design system foundation for sharing visual decisions across 
 ### Primitive tokens
 These are the raw design values that form the base of the system.
 
-- color ramps for neutral, blue, green, red, yellow, purple, sage, terracotta, harvest, and stone
+- color ramps for neutral, blue, green, red, yellow, purple, sage, terracotta, harvest, stone, and clay
 - spacing values for gaps, padding, and margins
 - typography values for font families, sizes, weights, and line heights
 - radius values for controls, cards, overlays, and pills
@@ -19,7 +19,7 @@ These are the role-based values apps should consume for common UI concepts.
 
 Examples include:
 - shared light and dark color roles for actions, surfaces, text, borders, and status colors
-- optional brand overrides, including the recipe theme's botanical colors and warm stone surfaces
+- optional brand overrides, including the recipe theme's botanical colors and warm clay surfaces
 - interaction-state colors for hover, pressed, disabled, selected, and invalid controls
 - spacing scales for layout and component spacing
 - typography scales for standard text treatments
