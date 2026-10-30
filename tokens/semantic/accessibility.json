@@ -1,0 +1,15 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "accessibility": {
+    "focus": {
+      "ring": {
+        "color": {
+          "light": { "$type": "color", "$value": "{color.blue.600}" },
+          "dark": { "$type": "color", "$value": "{color.blue.300}" }
+        },
+        "width": { "$type": "dimension", "$value": "2px" },
+        "offset": { "$type": "dimension", "$value": "2px" }
+      }
+    }
+  }
+}

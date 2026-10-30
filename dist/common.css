@@ -243,3 +243,41 @@
 .font-weight-strong {
   font-weight: var(--typography-font-weight-strong);
 }
+
+.focus-ring:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.state-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--color-state-hover-foreground);
+  background-color: var(--color-state-hover-surface);
+  border-color: var(--color-state-hover-border);
+}
+
+.state-pressed:active:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--color-state-pressed-foreground);
+  background-color: var(--color-state-pressed-surface);
+  border-color: var(--color-state-pressed-border);
+}
+
+.state-disabled:disabled,
+.state-disabled[aria-disabled="true"] {
+  color: var(--color-state-disabled-foreground);
+  background-color: var(--color-state-disabled-surface);
+  border-color: var(--color-state-disabled-border);
+  cursor: not-allowed;
+}
+
+.state-selected[aria-selected="true"],
+.state-selected[aria-pressed="true"] {
+  color: var(--color-state-selected-foreground);
+  background-color: var(--color-state-selected-surface);
+  border-color: var(--color-state-selected-border);
+}
+
+.state-invalid[aria-invalid="true"] {
+  color: var(--color-state-invalid-foreground);
+  background-color: var(--color-state-invalid-surface);
+  border-color: var(--color-state-invalid-border);
+}

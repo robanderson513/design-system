@@ -1,4 +1,4 @@
-const color = {
+const lightTheme = {
   primary: '#0066cc',
   ai: '#7e22ce',
   surface: {
@@ -43,6 +43,96 @@ const color = {
     info: {
       foreground: '#0053a8',
       surface: '#eaf3ff'
+    }
+  },
+  state: {
+    hover: { foreground: '#004285', surface: '#eaf3ff', border: '#a9ccff' },
+    pressed: { foreground: '#003363', surface: '#d4e5ff', border: '#75adff' },
+    disabled: { foreground: '#737373', surface: '#f5f5f5', border: '#e5e5e5' },
+    selected: { foreground: '#004285', surface: '#eaf3ff', border: '#0066cc' },
+    invalid: { foreground: '#b91c1c', surface: '#fef2f2', border: '#dc2626' }
+  }
+};
+
+const darkTheme = {
+  primary: '#3f8df2',
+  ai: '#d8b4fe',
+  surface: {
+    default: '#0a0a0a',
+    subtle: '#171717',
+    inverse: '#fafafa'
+  },
+  text: {
+    primary: '#fafafa',
+    secondary: '#d4d4d4',
+    muted: '#a3a3a3',
+    inverse: '#171717'
+  },
+  border: {
+    default: '#404040',
+    strong: '#737373',
+    subtle: '#262626'
+  },
+  action: {
+    primary: {
+      default: '#3f8df2',
+      hover: '#75adff'
+    },
+    secondary: {
+      default: '#d4d4d4',
+      hover: '#fafafa'
+    }
+  },
+  status: {
+    success: {
+      foreground: '#86efac',
+      surface: '#052e16'
+    },
+    error: {
+      foreground: '#fca5a5',
+      surface: '#450a0a'
+    },
+    warning: {
+      foreground: '#fef08a',
+      surface: '#422006'
+    },
+    info: {
+      foreground: '#75adff',
+      surface: '#002244'
+    }
+  },
+  state: {
+    hover: { foreground: '#fafafa', surface: '#262626', border: '#404040' },
+    pressed: { foreground: '#fafafa', surface: '#404040', border: '#525252' },
+    disabled: { foreground: '#737373', surface: '#262626', border: '#404040' },
+    selected: { foreground: '#d4e5ff', surface: '#002244', border: '#0053a8' },
+    invalid: { foreground: '#fecaca', surface: '#450a0a', border: '#b91c1c' }
+  }
+};
+
+const color = {
+  primary: '#0066cc',
+  ai: '#7e22ce',
+  theme: {
+    light: lightTheme,
+    dark: darkTheme
+  },
+  surface: lightTheme.surface,
+  text: lightTheme.text,
+  border: lightTheme.border,
+  action: lightTheme.action,
+  status: lightTheme.status
+};
+
+const accessibility = {
+  focus: {
+    ring: {
+      color: {
+        light: '#0066cc',
+        dark: '#75adff'
+      },
+      width: '2px',
+      offset: '2px'
     }
   }
 };
@@ -105,5 +195,6 @@ module.exports = {
   color,
   spacing,
   typography,
-  radius
+  radius,
+  accessibility
 };
