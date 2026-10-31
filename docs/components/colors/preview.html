@@ -137,8 +137,8 @@
       const appearanceSelect = document.querySelector('#appearance');
 
       Promise.all([
-        fetch('./tokens/semantic/colors.json'),
-        fetch('./tokens/primitives/colors.json')
+        fetch('../../../tokens/semantic/colors.json'),
+        fetch('../../../tokens/primitives/colors.json')
       ])
         .then(async ([semanticResponse, primitiveResponse]) => {
           if (!semanticResponse.ok || !primitiveResponse.ok) {

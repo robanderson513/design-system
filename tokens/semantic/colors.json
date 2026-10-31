@@ -34,6 +34,12 @@
             "default": { "$value": "{color.neutral.700}" },
             "hover": { "$value": "{color.neutral.900}" },
             "text": { "$value": "{color.neutral.50}" }
+          },
+          "tonal": {
+            "container": { "$value": "{color.neutral.100}" },
+            "hover": { "$value": "{color.neutral.200}" },
+            "pressed": { "$value": "{color.neutral.300}" },
+            "text": { "$value": "{color.neutral.900}" }
           }
         },
         "status": {
@@ -111,6 +117,12 @@
             "default": { "$value": "{color.neutral.300}" },
             "hover": { "$value": "{color.neutral.50}" },
             "text": { "$value": "{color.neutral.950}" }
+          },
+          "tonal": {
+            "container": { "$value": "{color.neutral.800}" },
+            "hover": { "$value": "{color.neutral.700}" },
+            "pressed": { "$value": "{color.neutral.600}" },
+            "text": { "$value": "{color.neutral.50}" }
           }
         },
         "status": {
@@ -192,18 +204,24 @@
               "default": { "$value": "{color.terracotta.800}" },
               "hover": { "$value": "{color.terracotta.900}" },
               "text": { "$value": "{color.neutral.50}" }
+            },
+            "tonal": {
+              "container": { "$value": "{color.clay.100}" },
+              "hover": { "$value": "{color.clay.200}" },
+              "pressed": { "$value": "{color.clay.300}" },
+              "text": { "$value": "{color.clay.900}" }
             }
           },
           "state": {
             "hover": {
-              "foreground": { "$value": "{color.sage.800}" },
-              "surface": { "$value": "{color.sage.50}" },
-              "border": { "$value": "{color.sage.200}" }
+              "foreground": { "$value": "{color.clay.900}" },
+              "surface": { "$value": "{color.clay.100}" },
+              "border": { "$value": "{color.clay.200}" }
             },
             "pressed": {
-              "foreground": { "$value": "{color.sage.900}" },
-              "surface": { "$value": "{color.sage.100}" },
-              "border": { "$value": "{color.sage.300}" }
+              "foreground": { "$value": "{color.clay.900}" },
+              "surface": { "$value": "{color.clay.200}" },
+              "border": { "$value": "{color.clay.300}" }
             },
             "selected": {
               "foreground": { "$value": "{color.sage.800}" },
@@ -242,6 +260,12 @@
               "default": { "$value": "{color.terracotta.300}" },
               "hover": { "$value": "{color.terracotta.200}" },
               "text": { "$value": "{color.clay.900}" }
+            },
+            "tonal": {
+              "container": { "$value": "{color.clay.800}" },
+              "hover": { "$value": "{color.clay.700}" },
+              "pressed": { "$value": "{color.clay.600}" },
+              "text": { "$value": "{color.clay.50}" }
             }
           },
           "state": {
@@ -288,6 +312,12 @@
       "secondary": {
         "default": { "$value": "{color.theme.light.action.secondary.default}" },
         "hover": { "$value": "{color.theme.light.action.secondary.hover}" }
+      },
+      "tonal": {
+        "container": { "$value": "{color.theme.light.action.tonal.container}" },
+        "hover": { "$value": "{color.theme.light.action.tonal.hover}" },
+        "pressed": { "$value": "{color.theme.light.action.tonal.pressed}" },
+        "text": { "$value": "{color.theme.light.action.tonal.text}" }
       }
     },
     "status": {

@@ -30,8 +30,8 @@ This layer is designed to make app styling more consistent and easier to reason 
 ### CSS variables and shared utility classes
 The package also ships CSS custom properties and shared utility classes so apps can consume the design system directly in CSS.
 
-- `@robanderson513/tokens/css` exposes CSS custom properties such as `--color-primary` and `--spacing-gap-default`, along with the base `html` and `body` foundation styles to establish typography, color inheritance, and text rendering
-- `@robanderson513/tokens/common` exposes shared utility classes such as `.flex`, `.gap-default`, `.p-card`, `.font-heading`, `.text-body`, `.rounded-card`, `.border`, and `.text-center`
+- `@robanderson513/design-system/css` exposes CSS custom properties such as `--color-primary` and `--spacing-gap-default`, along with the base `html` and `body` foundation styles to establish typography, color inheritance, and text rendering
+- `@robanderson513/design-system/common` exposes shared utility classes such as `.flex`, `.gap-default`, `.p-card`, `.font-heading`, `.text-body`, `.rounded-card`, `.border`, and `.text-center`
 - Setting `data-theme="dark"` on an element switches its semantic color and focus-ring variables to dark values; the default is light
 - Setting `data-palette="earth"` opts into the earth palette independently of `data-theme`; its default appearance is light
 - Opt-in `.focus-ring` and `.state-*` utilities provide `:focus-visible` and common interaction-state styles
@@ -45,14 +45,14 @@ These utilities are meant to provide a lightweight baseline for layout, spacing,
 - `dist/index.js` exports the JavaScript token object for consuming apps
 - `dist/tokens.css` exports the CSS custom property set
 - `dist/common.css` exports shared layout and typography utility classes
-- `preview.html` provides a visual preview of the token values
+- `docs/components/colors/preview.html` provides a visual preview of primitive color ramps and resolved semantic color roles
 
 ## Installation
 
 Configure npm to use the GitHub Packages registry for this package, then install it:
 
 ```sh
-npm install @robanderson513/tokens
+npm install @robanderson513/design-system
 ```
 
 ## Usage
@@ -60,7 +60,7 @@ npm install @robanderson513/tokens
 ### JavaScript usage
 
 ```js
-const tokens = require('@robanderson513/tokens');
+const tokens = require('@robanderson513/design-system');
 
 const primary = tokens.color.primary;
 const primaryActionHover = tokens.color.action.primary.hover;
@@ -73,7 +73,8 @@ const bodySize = tokens.typography.fontSize.body;
 ### CSS usage
 
 ```css
-@import '@robanderson513/tokens/css';
+@import '@robanderson513/design-system/css';
+@import '@robanderson513/design-system/common';
 
 .card {
   background: var(--color-surface-default);
@@ -100,6 +101,12 @@ For the default brand, add only `data-theme="dark"` to the document or a contain
 
 `.focus-ring` adds a visible outline only for keyboard or other `:focus-visible` interaction. Consumers remain responsible for correct semantics, accessible names, and testing color contrast in their specific UI.
 
+### Button styles
+
+The shared stylesheet provides baseline, filled (`.button-primary`), tonal, elevated, outlined (`.button-secondary`), primary-colored text, neutral text (`.button-text-neutral`), and icon-only button styles that resolve through the active theme and palette. See [button guidance](docs/components/buttons/README.md) for variant and interaction-state rules, and [the button preview](docs/components/buttons/preview.html) to view the constructed buttons.
+
+For agent-assisted implementation, start with the [consumer guide](AGENTS.md). Browse the [documentation index](docs/README.md) for the separate Colors and Buttons sections.
+
 ### Shared utility classes
 
 ```html
@@ -110,7 +117,7 @@ For the default brand, add only `data-theme="dark"` to the document or a contain
 
 ## Previewing the tokens
 
-Serve the repository root with a local HTTP server and open `preview.html` in the browser.
+Serve the repository root with a local HTTP server and open the [color palette preview](docs/components/colors/preview.html) or the [button preview](docs/components/buttons/preview.html) in the browser.
 
 ```sh
 python -m http.server 8000
@@ -119,7 +126,7 @@ python -m http.server 8000
 Then open:
 
 ```text
-http://localhost:8000/preview.html
+http://localhost:8000/docs/components/colors/preview.html
 ```
 
 ## Design guidance
