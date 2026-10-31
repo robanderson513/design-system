@@ -31,7 +31,7 @@ const resolveReference = (reference, seen = new Set()) => {
 const contrastRatio = (foreground, background) => {
   const luminance = (hex) => {
     const channels = hex.slice(1).match(/.{2}/g).map((channel) => parseInt(channel, 16) / 255)
-      .map((channel) => channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2);
+      .map((channel) => channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4);
     return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
   };
   const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
@@ -122,6 +122,52 @@ test('earth palette semantic values match CommonJS exports and CSS variables', (
   }
 });
 
+test('earth neutral button hover and pressed states use warm neutral tokens', () => {
+  const states = tokens.color.palette.earth.light.state;
+  assert.equal(states.hover.foreground, '#302620');
+  assert.equal(states.hover.surface, '#F0E1D6');
+  assert.equal(states.hover.border, '#E5CFC0');
+  assert.equal(states.pressed.foreground, '#302620');
+  assert.equal(states.pressed.surface, '#E5CFC0');
+  assert.equal(states.pressed.border, '#D5B6A3');
+  assert.match(commonCss, /\.button\s*\{[^}]*background: var\(--color-surface-default\);/s);
+});
+
+test('tonal and neutral text button roles resolve across all themes', () => {
+  const themes = [
+    colors.color.theme.light,
+    colors.color.theme.dark,
+    colors.color.palette.earth.light,
+    colors.color.palette.earth.dark
+  ];
+  const exports = [
+    tokens.color.theme.light,
+    tokens.color.theme.dark,
+    tokens.color.palette.earth.light,
+    tokens.color.palette.earth.dark
+  ];
+  for (let index = 0; index < themes.length; index += 1) {
+    const theme = themes[index];
+    const exported = exports[index];
+    const tonalForeground = resolveReference(theme.action.tonal.text.$value);
+    for (const state of ['container', 'hover', 'pressed']) {
+      const tonalBackground = resolveReference(theme.action.tonal[state].$value);
+      assert.equal(exported.action.tonal[state], tonalBackground);
+      assert.ok(contrastRatio(tonalForeground, tonalBackground) >= 4.5, `${state} tonal contrast`);
+    }
+    assert.equal(exported.action.tonal.text, tonalForeground);
+    assert.ok(contrastRatio(exported.text.primary, exported.surface.default) >= 4.5);
+    assert.ok(contrastRatio(exported.action.primary.default, exported.surface.default) >= 4.5);
+  }
+  assert.match(commonCss, /\.button-tonal\s*\{[^}]*background: var\(--color-action-tonal-container\);[^}]*color: var\(--color-action-tonal-text\);/s);
+  assert.match(commonCss, /\.button-tonal:hover[^}]*background: var\(--color-action-tonal-hover\);/);
+  assert.match(commonCss, /\.button-tonal:active[^}]*background: var\(--color-action-tonal-pressed\);/);
+  assert.match(commonCss, /\.button-text-neutral\s*\{[^}]*color: var\(--color-text-primary\);/s);
+  for (const token of ['--color-action-tonal-container:', '--color-action-tonal-hover:', '--color-action-tonal-pressed:', '--color-action-tonal-text:']) {
+    assert.ok(css.includes(token), `Expected CSS custom property ${token}`);
+  }
+});
+
 test('earth palette action text and body text meet WCAG AA contrast in both appearances', () => {
   for (const appearance of ['light', 'dark']) {
     const theme = tokens.color.palette.earth[appearance];
@@ -142,6 +188,53 @@ test('CSS exports theme variables and opt-in accessible state utilities', () => 
   assert.match(css, /--focus-ring-color:/);
   for (const utility of ['.focus-ring:focus-visible', '.state-hover:hover', '.state-pressed:active', '.state-disabled:disabled', '.state-selected[aria-selected="true"]', '.state-invalid[aria-invalid="true"]']) {
     assert.ok(commonCss.includes(utility), `Expected CSS utility ${utility}`);
+  }
+});
+
+test('button variants use theme-aware semantic tokens for their interaction states', () => {
+  for (const selector of [
+    '.button-primary:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button:active:not(:disabled):not([aria-disabled="true"])',
+    '.button-secondary:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button-secondary:active:not(:disabled):not([aria-disabled="true"])',
+    '.button-icon:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button-text:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button-text:active:not(:disabled):not([aria-disabled="true"])',
+    '.button-tonal:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button-tonal:active:not(:disabled):not([aria-disabled="true"])',
+    '.button-elevated:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button-elevated:active:not(:disabled):not([aria-disabled="true"])',
+    '.button-text-neutral:hover:not(:disabled):not([aria-disabled="true"])',
+    '.button-text-neutral:active:not(:disabled):not([aria-disabled="true"])'
+  ]) {
+    assert.ok(commonCss.includes(selector), `Expected button state selector ${selector}`);
+  }
+  for (const token of [
+    'background: var(--color-action-primary-default);',
+    'background: var(--color-action-primary-hover);',
+    'color: var(--color-action-primary-text);',
+    'background: var(--color-surface-default);',
+    'color: var(--color-text-primary);',
+    'border: 1px solid var(--color-border-default);',
+    'background: var(--color-state-hover-surface);',
+    'background: var(--color-state-pressed-surface);',
+    'var(--color-state-disabled-surface)',
+    'var(--focus-ring-color)',
+    'color: var(--color-action-primary-default);',
+    'background: var(--color-action-tonal-container);',
+    'background: var(--color-action-tonal-hover);',
+    'background: var(--color-action-tonal-pressed);',
+    'color: var(--color-action-tonal-text);',
+    'background: var(--color-surface-default);',
+    'box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.12));'
+  ]) {
+    assert.ok(commonCss.includes(token), `Expected button token usage ${token}`);
+  }
+  assert.match(commonCss, /\.button-icon > svg\s*\{\s*width: 20px;\s*height: 20px;/);
+  for (const variant of ['.button-primary', '.button-tonal', '.button-elevated', '.button-secondary', '.button-text', '.button-text-neutral', '.button-icon']) {
+    assert.ok(commonCss.includes(`${variant}:focus-visible`), `Expected focus style for ${variant}`);
+    assert.ok(commonCss.includes(`${variant}:disabled`), `Expected disabled style for ${variant}`);
   }
 });
 

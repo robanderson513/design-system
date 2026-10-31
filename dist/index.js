@@ -27,6 +27,12 @@ const lightTheme = {
       default: '#404040',
       hover: '#171717',
       text: '#fafafa'
+    },
+    tonal: {
+      container: '#f5f5f5',
+      hover: '#e5e5e5',
+      pressed: '#d4d4d4',
+      text: '#171717'
     }
   },
   status: {
@@ -85,6 +91,12 @@ const darkTheme = {
       default: '#d4d4d4',
       hover: '#fafafa',
       text: '#0a0a0a'
+    },
+    tonal: {
+      container: '#262626',
+      hover: '#404040',
+      pressed: '#525252',
+      text: '#fafafa'
     }
   },
   status: {
@@ -123,11 +135,12 @@ const earthLightTheme = {
   border: { default: '#E5CFC0', strong: '#C19B83', subtle: '#F0E1D6' },
   action: {
     primary: { default: '#4D674F', hover: '#3B503D', text: '#fafafa' },
-    secondary: { default: '#754432', hover: '#573326', text: '#fafafa' }
+    secondary: { default: '#754432', hover: '#573326', text: '#fafafa' },
+    tonal: { container: '#F0E1D6', hover: '#E5CFC0', pressed: '#D5B6A3', text: '#302620' }
   },
   state: {
-    hover: { foreground: '#3B503D', surface: '#F2F5F0', border: '#CCD9C8' },
-    pressed: { foreground: '#2B3B2D', surface: '#E5EBE1', border: '#B0C3AB' },
+    hover: { foreground: '#302620', surface: '#F0E1D6', border: '#E5CFC0' },
+    pressed: { foreground: '#302620', surface: '#E5CFC0', border: '#D5B6A3' },
     selected: { foreground: '#3B503D', surface: '#F2F5F0', border: '#617B63' }
   }
 };
@@ -141,7 +154,8 @@ const earthDarkTheme = {
   border: { default: '#694D3F', strong: '#A47C65', subtle: '#49372F' },
   action: {
     primary: { default: '#B0C3AB', hover: '#CCD9C8', text: '#2B3B2D' },
-    secondary: { default: '#DDB09A', hover: '#EACDBD', text: '#302620' }
+    secondary: { default: '#DDB09A', hover: '#EACDBD', text: '#302620' },
+    tonal: { container: '#49372F', hover: '#694D3F', pressed: '#87644F', text: '#F7EDE6' }
   },
   state: {
     hover: { foreground: '#F7EDE6', surface: '#49372F', border: '#694D3F' },
