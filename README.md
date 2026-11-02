@@ -8,7 +8,8 @@ A platform-neutral design system foundation for sharing visual decisions across 
 These are the raw design values that form the base of the system.
 
 - color ramps for neutral, blue, green, red, yellow, purple, sage, terracotta, harvest, stone, and clay
-- spacing values for gaps, padding, and margins
+- spacing values for gaps, padding, and margins, with a shared numeric scale for gap and padding utilities
+- shadow values for small, medium, and large elevation
 - typography values for font families, sizes, weights, and line heights
 - radius values for controls, cards, overlays, and pills
 
@@ -21,7 +22,8 @@ Examples include:
 - shared light and dark color roles for actions, surfaces, text, borders, and status colors
 - optional color palettes, including the earth palette's botanical accents and warm clay surfaces
 - interaction-state colors for hover, pressed, disabled, selected, and invalid controls
-- spacing scales for layout and component spacing
+- spacing scales for layout and component spacing, including a consistent numeric utility scale
+- shared elevation/shadow tokens for surfaces and overlays
 - typography scales for standard text treatments
 - radius values for common UI surfaces
 
@@ -30,8 +32,8 @@ This layer is designed to make app styling more consistent and easier to reason 
 ### CSS variables and shared utility classes
 The package also ships CSS custom properties and shared utility classes so apps can consume the design system directly in CSS.
 
-- `@robanderson513/design-system/css` exposes CSS custom properties such as `--color-primary` and `--spacing-gap-default`, along with the base `html` and `body` foundation styles to establish typography, color inheritance, and text rendering
-- `@robanderson513/design-system/common` exposes shared utility classes such as `.flex`, `.gap-default`, `.p-card`, `.font-heading`, `.text-body`, `.rounded-card`, `.border`, and `.text-center`
+- `@robanderson513/design-system/css` exposes CSS custom properties such as `--color-primary`, `--spacing-scale-4`, and `--shadow-md`, along with the base `html` and `body` foundation styles to establish typography, color inheritance, and text rendering
+- `@robanderson513/design-system/common` exposes shared utility classes such as `.flex`, `.gap-4`, `.p-4`, `.mb-4`, `.shadow-md`, `.font-heading`, `.text-body`, `.rounded-card`, `.border`, and `.text-center`
 - Setting `data-theme="dark"` on an element switches its semantic color and focus-ring variables to dark values; the default is light
 - Setting `data-palette="earth"` opts into the earth palette independently of `data-theme`; its default appearance is light
 - Opt-in `.focus-ring` and `.state-*` utilities provide `:focus-visible` and common interaction-state styles
@@ -66,7 +68,9 @@ const primary = tokens.color.primary;
 const primaryActionHover = tokens.color.action.primary.hover;
 const successText = tokens.color.status.success.foreground;
 const surface = tokens.color.surface.default;
-const gap = tokens.spacing.gap.default;
+const gap = tokens.spacing.scale[4];
+const spacingStep = tokens.spacing.scale[4];
+const elevation = tokens.shadow.md;
 const bodySize = tokens.typography.fontSize.body;
 ```
 
@@ -79,8 +83,9 @@ const bodySize = tokens.typography.fontSize.body;
 .card {
   background: var(--color-surface-default);
   color: var(--color-text-primary);
-  padding: var(--spacing-padding-card);
+  padding: var(--spacing-scale-4);
   border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
 }
 ```
 
@@ -110,10 +115,12 @@ For agent-assisted implementation, start with the [consumer guide](AGENTS.md). B
 ### Shared utility classes
 
 ```html
-<div class="flex gap-default items-center p-card">
+<div class="flex gap-4 items-center p-4 mb-8">
   <span class="text-body font-weight-strong">Example</span>
 </div>
 ```
+
+Numeric gap, padding, and margin utilities share the same spacing values (`gap-4`, `p-4`, and `mb-4` are all 16px). Spacing utilities use numeric scale values; component-specific spacing should be defined as a component token when that need is established.
 
 ## Previewing the tokens
 

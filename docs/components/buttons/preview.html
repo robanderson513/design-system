@@ -25,12 +25,12 @@
       .theme-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
-        gap: var(--spacing-gap-default);
-        margin-top: var(--spacing-gap-relaxed);
+        gap: var(--spacing-scale-4);
+        margin-top: var(--spacing-scale-6);
       }
 
       .theme-card {
-        padding: var(--spacing-padding-card);
+        padding: var(--spacing-scale-6);
         border: 1px solid var(--color-border-default);
         border-radius: var(--radius-card);
         background: var(--color-surface-default);
@@ -45,8 +45,8 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: var(--spacing-gap-tight);
-        padding: var(--spacing-padding-compact) 0;
+        gap: var(--spacing-scale-2);
+        padding: var(--spacing-scale-2) 0;
         border-top: 1px solid var(--color-border-subtle);
       }
 
@@ -75,7 +75,7 @@
 
       @media (max-width: 520px) {
         .theme-card {
-          padding: var(--spacing-padding-control);
+          padding: var(--spacing-scale-3);
         }
       }
     </style>

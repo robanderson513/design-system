@@ -198,24 +198,23 @@ const accessibility = {
 };
 
 const spacing = {
-  gap: {
-    tight: '8px',
-    compact: '12px',
-    default: '16px',
-    relaxed: '24px',
-    section: '32px'
-  },
-  padding: {
-    compact: '8px',
-    control: '12px',
-    card: '24px',
-    section: '32px'
-  },
-  margin: {
-    element: '16px',
-    section: '32px',
-    page: '48px'
+  scale: {
+    0: '0px',
+    1: '4px',
+    2: '8px',
+    3: '12px',
+    4: '16px',
+    6: '24px',
+    8: '32px',
+    12: '48px',
+    16: '64px'
   }
+};
+
+const shadow = {
+  sm: '0 1px 2px 0 rgba(23, 23, 23, 0.08)',
+  md: '0 4px 12px 0 rgba(23, 23, 23, 0.12)',
+  lg: '0 12px 24px 0 rgba(23, 23, 23, 0.16)'
 };
 
 const typography = {
@@ -254,6 +253,7 @@ const radius = {
 module.exports = {
   color,
   spacing,
+  shadow,
   typography,
   radius,
   accessibility

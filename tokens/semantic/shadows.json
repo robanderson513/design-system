@@ -1,0 +1,9 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "shadow": {
+    "$type": "shadow",
+    "sm": { "$value": "{shadow.sm}" },
+    "md": { "$value": "{shadow.md}" },
+    "lg": { "$value": "{shadow.lg}" }
+  }
+}
