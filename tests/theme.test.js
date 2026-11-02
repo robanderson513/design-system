@@ -6,7 +6,9 @@ const test = require('node:test');
 const root = path.join(__dirname, '..');
 const tokens = require(path.join(root, 'dist/index.js'));
 const colors = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/colors.json'), 'utf8'));
+const radii = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/radius.json'), 'utf8'));
 const primitives = JSON.parse(fs.readFileSync(path.join(root, 'tokens/primitives/colors.json'), 'utf8'));
+const radiusPrimitives = JSON.parse(fs.readFileSync(path.join(root, 'tokens/primitives/radii.json'), 'utf8'));
 const accessibility = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/accessibility.json'), 'utf8'));
 const css = fs.readFileSync(path.join(root, 'dist/tokens.css'), 'utf8');
 const commonCss = fs.readFileSync(path.join(root, 'dist/common.css'), 'utf8');
@@ -236,6 +238,32 @@ test('button variants use theme-aware semantic tokens for their interaction stat
     assert.ok(commonCss.includes(`${variant}:focus-visible`), `Expected focus style for ${variant}`);
     assert.ok(commonCss.includes(`${variant}:disabled`), `Expected disabled style for ${variant}`);
   }
+});
+
+test('buttons use the rounded control radius and keep disabled variants visually distinct', () => {
+  assert.equal(radii.radius.control.$value, '{borderRadius.lg}');
+  assert.equal(radiusPrimitives.borderRadius.lg.$value, '8px');
+  assert.match(css, /--radius-control:\s*8px;/);
+  assert.match(commonCss, /\.button,\s*\.button-primary,[\s\S]*?border-radius: var\(--radius-control\);/);
+
+  const variants = [
+    '.button',
+    '.button-primary',
+    '.button-secondary',
+    '.button-icon',
+    '.button-text',
+    '.button-tonal',
+    '.button-elevated',
+    '.button-text-neutral'
+  ];
+  for (const variant of variants) {
+    assert.ok(commonCss.includes(`${variant}:disabled`), `Expected native disabled style for ${variant}`);
+    assert.ok(commonCss.includes(`${variant}[aria-disabled="true"]`), `Expected ARIA disabled style for ${variant}`);
+  }
+  assert.match(commonCss, /\.button-icon:disabled,[\s\S]*?background-color: transparent;/);
+  assert.match(commonCss, /\.button-text:disabled,[\s\S]*?background-color: transparent;/);
+  assert.match(commonCss, /\.button-text-neutral:disabled,[\s\S]*?background-color: transparent;/);
+  assert.match(commonCss, /\.button-elevated:disabled,[\s\S]*?box-shadow: none;/);
 });
 
 test('CSS provides base foundation styles and reusable primitive utilities', () => {

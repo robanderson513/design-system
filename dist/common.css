@@ -562,6 +562,21 @@
   background: var(--color-state-pressed-surface);
 }
 
+.button-icon:disabled,
+.button-icon[aria-disabled="true"],
+.button-text:disabled,
+.button-text[aria-disabled="true"],
+.button-text-neutral:disabled,
+.button-text-neutral[aria-disabled="true"] {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.button-elevated:disabled,
+.button-elevated[aria-disabled="true"] {
+  box-shadow: none;
+}
+
 .state-hover:hover:not(:disabled):not([aria-disabled="true"]) {
   color: var(--color-state-hover-foreground);
   background-color: var(--color-state-hover-surface);

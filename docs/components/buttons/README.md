@@ -22,6 +22,7 @@ Use the native `<button>` element for actions. `.button` is a complete baseline 
 
 Variant classes also include the shared base styles, so they can be used without `.button`. Keep the variants role-based rather than tying them to a particular product or palette:
 
+- All button variants use the shared control radius, currently 8px.
 - `.button` is the baseline neutral action, with shared spacing, typography, border, surface, hover, and pressed treatments.
 - `.button-primary` is the filled, highest-emphasis action. Its default fill, hover fill, and foreground come from `color.action.primary`.
 - `.button-tonal` is a contained, lower-emphasis action than primary, using dedicated tonal container and foreground roles.
@@ -50,7 +51,7 @@ Theme selection is independent of button classes. `data-theme` selects light or 
 
 Use variant-specific action tokens when they exist. `.button-primary` uses its action default, hover, and text tokens. `.button-tonal` uses its theme-defined container, hover, pressed, and text roles; do not substitute selected-state or generic neutral-state tokens. `.button`, `.button-secondary`, and text buttons use neutral interaction-state roles. These generic roles must not replace a filled action's variant-specific color. `color.action.secondary` remains available to consumers that intentionally need a second filled action, but the shared secondary button is outlined by default. Icon hover uses the subtle surface role.
 
-Disabled styles use the shared disabled state roles and apply to both native `disabled` and `aria-disabled="true"`. `aria-disabled` only changes presentation; application code must also prevent activation. Buttons receive the shared focus ring on `:focus-visible`, so keyboard focus remains visible without requiring an extra utility class.
+Disabled styles use the shared disabled foreground, surface, and border roles and apply to both native `disabled` and `aria-disabled="true"`. Text and icon buttons remain transparent, and disabled elevated buttons lose their shadow so the disabled treatment does not change their variant shape or imply extra emphasis. `aria-disabled` only changes presentation; application code must also prevent activation. Buttons receive the shared focus ring on `:focus-visible`, so keyboard focus remains visible without requiring an extra utility class.
 
 The baseline theme supplies usable values by default; setting `data-theme` or `data-palette` switches the same component styles to the selected theme. Future themes should provide values for the semantic roles these variants consume. If a new variant needs a different interaction treatment, define or select its semantic role explicitly and document the mapping here rather than adding theme-specific button selectors.
 
