@@ -7,8 +7,11 @@ const root = path.join(__dirname, '..');
 const tokens = require(path.join(root, 'dist/index.js'));
 const colors = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/colors.json'), 'utf8'));
 const radii = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/radius.json'), 'utf8'));
+const spacing = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/spacing.json'), 'utf8'));
 const primitives = JSON.parse(fs.readFileSync(path.join(root, 'tokens/primitives/colors.json'), 'utf8'));
 const radiusPrimitives = JSON.parse(fs.readFileSync(path.join(root, 'tokens/primitives/radii.json'), 'utf8'));
+const primitiveShadows = JSON.parse(fs.readFileSync(path.join(root, 'tokens/primitives/shadows.json'), 'utf8'));
+const semanticShadows = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/shadows.json'), 'utf8'));
 const accessibility = JSON.parse(fs.readFileSync(path.join(root, 'tokens/semantic/accessibility.json'), 'utf8'));
 const css = fs.readFileSync(path.join(root, 'dist/tokens.css'), 'utf8');
 const commonCss = fs.readFileSync(path.join(root, 'dist/common.css'), 'utf8');
@@ -229,7 +232,7 @@ test('button variants use theme-aware semantic tokens for their interaction stat
     'background: var(--color-action-tonal-pressed);',
     'color: var(--color-action-tonal-text);',
     'background: var(--color-surface-default);',
-    'box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.12));'
+    'box-shadow: var(--shadow-sm);'
   ]) {
     assert.ok(commonCss.includes(token), `Expected button token usage ${token}`);
   }
@@ -266,6 +269,59 @@ test('buttons use the rounded control radius and keep disabled variants visually
   assert.match(commonCss, /\.button-elevated:disabled,[\s\S]*?box-shadow: none;/);
 });
 
+test('numeric gap, padding, and margin utilities share the same spacing scale', () => {
+  const expected = {
+    0: '0px',
+    1: '4px',
+    2: '8px',
+    3: '12px',
+    4: '16px',
+    6: '24px',
+    8: '32px',
+    12: '48px',
+    16: '64px'
+  };
+  for (const [step, value] of Object.entries(expected)) {
+    assert.equal(spacing.spacing.scale[step].$value, `{spacing.${step}}`);
+    assert.equal(tokens.spacing.scale[step], value);
+    assert.ok(css.includes(`--spacing-scale-${step}: ${value};`));
+    assert.ok(commonCss.includes(`.gap-${step}, .g-${step} { gap: var(--spacing-scale-${step}); }`));
+    assert.ok(commonCss.includes(`.p-${step} { padding: var(--spacing-scale-${step}); }`));
+    assert.ok(commonCss.includes(`.px-${step} { padding-left: var(--spacing-scale-${step}); padding-right: var(--spacing-scale-${step}); }`));
+    assert.ok(commonCss.includes(`.m-${step} { margin: var(--spacing-scale-${step}); }`));
+    for (const [utility, property] of [['mt', 'top'], ['mr', 'right'], ['mb', 'bottom'], ['ml', 'left']]) {
+      assert.ok(commonCss.includes(`.${utility}-${step} { margin-${property}: var(--spacing-scale-${step}); }`));
+    }
+    assert.ok(commonCss.includes(`.mx-${step} { margin-left: var(--spacing-scale-${step}); margin-right: var(--spacing-scale-${step}); }`));
+    assert.ok(commonCss.includes(`.my-${step} { margin-top: var(--spacing-scale-${step}); margin-bottom: var(--spacing-scale-${step}); }`));
+  }
+  assert.deepEqual(Object.keys(spacing.spacing).filter((key) => key !== '$type'), ['scale']);
+  assert.deepEqual(Object.keys(tokens.spacing), ['scale']);
+  assert.doesNotMatch(css, /--spacing-(?:gap|padding|margin)-/);
+  assert.doesNotMatch(commonCss, /\.(?:gap|g|p|pt|pr|pb|pl|px|py|m|mt|mr|mb|ml|mx|my)-(?:tight|compact|default|relaxed|section|control|card|element|page)\b/);
+});
+
+test('shadow tokens resolve through CSS utilities and CommonJS exports', () => {
+  const expected = {
+    sm: '0 1px 2px 0 rgba(23, 23, 23, 0.08)',
+    md: '0 4px 12px 0 rgba(23, 23, 23, 0.12)',
+    lg: '0 12px 24px 0 rgba(23, 23, 23, 0.16)'
+  };
+  for (const [size, value] of Object.entries(expected)) {
+    assert.equal(semanticShadows.shadow[size].$value, `{shadow.${size}}`);
+    assert.deepEqual(primitiveShadows.shadow[size].$value, {
+      color: `rgba(23, 23, 23, ${size === 'sm' ? '0.08' : size === 'md' ? '0.12' : '0.16'})`,
+      offsetX: '0px',
+      offsetY: size === 'sm' ? '1px' : size === 'md' ? '4px' : '12px',
+      blur: size === 'sm' ? '2px' : size === 'md' ? '12px' : '24px',
+      spread: '0px'
+    });
+    assert.equal(tokens.shadow[size], value);
+    assert.ok(css.includes(`--shadow-${size}: ${value};`), `Expected CSS token --shadow-${size}`);
+    assert.match(commonCss, new RegExp(`\\.shadow-${size}\\s*\\{\\s*box-shadow: var\\(--shadow-${size}\\);\\s*\\}`));
+  }
+});
+
 test('CSS provides base foundation styles and reusable primitive utilities', () => {
   for (const rule of [
     'box-sizing: border-box;',
@@ -278,9 +334,12 @@ test('CSS provides base foundation styles and reusable primitive utilities', () 
   }
   for (const utility of [
     '.flex {',
-    '.gap-default',
-    '.p-card',
-    '.m-element',
+    '.gap-4',
+    '.p-6',
+    '.m-4',
+    '.mt-4',
+    '.mx-4',
+    '.my-4',
     '.text-center',
     '.border {',
     '.rounded-card',

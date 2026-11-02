@@ -8,6 +8,7 @@ For every task in this repository:
 4. For every ticket that changes the app, create or update `audits/<ticket-id>.md` to record the ticket's PR changes: include the ticket and PR references when available, a concise description of what shipped, the main implementation details and affected files, and the checks run (including checks that could not be run). Keep it factual and scoped to that change; do not attribute unrelated baseline history to the ticket. Update the ticket's existing audit file rather than creating a duplicate.
 5. Run the narrowest applicable checks available in the repository. There are no package scripts or build/generation command; run the focused suite with `node --test tests/theme.test.js`. For token JSON changes, parse the JSON; for package-facing changes, verify the CommonJS entry point with Node.js. State any validation that could not be run.
 6. Review the final diff for correctness, unintended changes, and consistency across affected files. Do not commit or publish unless asked.
+7. For every PR, assess the package version impact and recommend major, minor, patch, or no bump, with a concise rationale based on public API and consumer compatibility. Present that judgment to the developer and wait for explicit verification before changing `package.json`'s version or creating/updating the PR. Do not treat a prior version choice as approval for a new PR. Record the verified decision in the PR summary and ticket audit when applicable.
 
 ## Repository-specific guidance
 

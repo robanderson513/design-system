@@ -2,6 +2,8 @@
 
 Use this guide when implementing UI with `@robanderson513/design-system`. Prefer the shipped semantic tokens and shared component styles over hard-coded colors, spacing, typography, or button states.
 
+When evaluating or extending design-system tokens and utilities, use Material UI (MUI) guidance as a reference. Adapt it to this system's semantic tokens and conventions rather than copying app-specific styles.
+
 ## Package entry points
 
 - `@robanderson513/design-system`: CommonJS token object from `dist/index.js`
