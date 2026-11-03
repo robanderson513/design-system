@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form styles preview</title>
+    <link rel="stylesheet" href="../../../dist/tokens.css">
+    <link rel="stylesheet" href="../../../dist/common.css">
+    <style>
+      body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      .intro,
+      .preview-note {
+        max-width: 70ch;
+        color: var(--color-text-secondary);
+      }
+
+      .theme-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+        gap: var(--spacing-scale-4);
+        margin-top: var(--spacing-scale-6);
+      }
+
+      .theme-card {
+        padding: var(--spacing-scale-6);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-card);
+        background: var(--color-surface-default);
+        color: var(--color-text-primary);
+      }
+
+      .theme-card[data-theme="dark"] {
+        color-scheme: dark;
+      }
+
+      .theme-card h2 {
+        margin-top: 0;
+      }
+
+      .form-example {
+        display: grid;
+        gap: var(--spacing-scale-4);
+      }
+
+      .field {
+        display: grid;
+        gap: var(--spacing-scale-1);
+      }
+
+      .field > label,
+      legend {
+        font-weight: var(--typography-font-weight-strong);
+      }
+
+      .field-hint,
+      .field-error {
+        margin: 0;
+        font-size: var(--typography-font-size-caption);
+      }
+
+      .field-hint {
+        color: var(--color-text-secondary);
+      }
+
+      .field-error {
+        color: var(--color-state-invalid-foreground);
+      }
+
+      .form-control {
+        width: 100%;
+        min-height: 40px;
+        padding: var(--spacing-scale-2) var(--spacing-scale-3);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-control);
+        background: var(--color-surface-default);
+        color: var(--color-text-primary);
+        font: inherit;
+      }
+
+      .form-control:hover:not(:disabled):not([type="checkbox"]):not([type="radio"]):not([aria-invalid="true"]) {
+        border-color: var(--color-border-strong);
+      }
+
+      textarea.form-control {
+        min-height: 96px;
+        resize: vertical;
+      }
+
+      .form-control:disabled {
+        color: var(--color-state-disabled-foreground);
+        background: var(--color-state-disabled-surface);
+        border-color: var(--color-state-disabled-border);
+        cursor: not-allowed;
+      }
+
+      .form-control[type="checkbox"] {
+        width: 1rem;
+        min-height: 1rem;
+        margin: 0;
+        padding: 0;
+        accent-color: var(--color-action-primary-default);
+      }
+
+      .choice-group {
+        display: grid;
+        gap: var(--spacing-scale-2);
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .choice {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-scale-2);
+      }
+
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-scale-2);
+      }
+
+      .preview-note {
+        margin-top: var(--spacing-scale-4);
+        font-size: var(--typography-font-size-caption);
+      }
+
+      @media (max-width: 520px) {
+        .theme-card {
+          padding: var(--spacing-scale-3);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Form controls</h1>
+      <p class="intro">
+        Examples use native controls and semantic design tokens for surfaces, borders, text, focus, and status.
+        The control styling on this page is an example recipe, not a shipped form component API.
+      </p>
+    </header>
+
+    <main class="theme-grid">
+      <section class="theme-card" data-theme="light" aria-labelledby="default-light-heading">
+        <h2 id="default-light-heading">Default · Light</h2>
+        <form class="form-example">
+          <div class="field">
+            <label for="default-light-name">Name <span>(required)</span></label>
+            <input class="form-control focus-ring" id="default-light-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="default-light-email">Email address</label>
+            <p class="field-hint" id="default-light-email-hint">Use a work email address.</p>
+            <input class="form-control focus-ring state-invalid" id="default-light-email" name="email" type="email" value="alex@" aria-invalid="true" aria-describedby="default-light-email-hint default-light-email-error">
+            <p class="field-error" id="default-light-email-error">Enter a valid email address.</p>
+          </div>
+          <div class="field">
+            <label for="default-light-role">Role</label>
+            <select class="form-control focus-ring" id="default-light-role" name="role">
+              <option value="">Choose a role</option>
+              <option>Designer</option>
+              <option>Engineer</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="default-light-message">Message</label>
+            <textarea class="form-control focus-ring" id="default-light-message" name="message"></textarea>
+          </div>
+          <fieldset class="choice-group">
+            <legend>Updates</legend>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" disabled> Disabled option</label>
+          </fieldset>
+          <div class="form-actions">
+            <button class="button-primary" type="button">Submit example</button>
+            <button class="button-secondary" type="reset">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="theme-card" data-theme="dark" aria-labelledby="default-dark-heading">
+        <h2 id="default-dark-heading">Default · Dark</h2>
+        <form class="form-example">
+          <div class="field">
+            <label for="default-dark-name">Name <span>(required)</span></label>
+            <input class="form-control focus-ring" id="default-dark-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="default-dark-email">Email address</label>
+            <p class="field-hint" id="default-dark-email-hint">Use a work email address.</p>
+            <input class="form-control focus-ring state-invalid" id="default-dark-email" name="email" type="email" value="alex@" aria-invalid="true" aria-describedby="default-dark-email-hint default-dark-email-error">
+            <p class="field-error" id="default-dark-email-error">Enter a valid email address.</p>
+          </div>
+          <div class="field">
+            <label for="default-dark-role">Role</label>
+            <select class="form-control focus-ring" id="default-dark-role" name="role">
+              <option value="">Choose a role</option>
+              <option>Designer</option>
+              <option>Engineer</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="default-dark-message">Message</label>
+            <textarea class="form-control focus-ring" id="default-dark-message" name="message"></textarea>
+          </div>
+          <fieldset class="choice-group">
+            <legend>Updates</legend>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" disabled> Disabled option</label>
+          </fieldset>
+          <div class="form-actions">
+            <button class="button-primary" type="button">Submit example</button>
+            <button class="button-secondary" type="reset">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="theme-card" data-palette="earth" data-theme="light" aria-labelledby="earth-light-heading">
+        <h2 id="earth-light-heading">Earth · Light</h2>
+        <form class="form-example">
+          <div class="field">
+            <label for="earth-light-name">Name <span>(required)</span></label>
+            <input class="form-control focus-ring" id="earth-light-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="earth-light-email">Email address</label>
+            <p class="field-hint" id="earth-light-email-hint">Use a work email address.</p>
+            <input class="form-control focus-ring state-invalid" id="earth-light-email" name="email" type="email" value="alex@" aria-invalid="true" aria-describedby="earth-light-email-hint earth-light-email-error">
+            <p class="field-error" id="earth-light-email-error">Enter a valid email address.</p>
+          </div>
+          <div class="field">
+            <label for="earth-light-role">Role</label>
+            <select class="form-control focus-ring" id="earth-light-role" name="role">
+              <option value="">Choose a role</option>
+              <option>Designer</option>
+              <option>Engineer</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="earth-light-message">Message</label>
+            <textarea class="form-control focus-ring" id="earth-light-message" name="message"></textarea>
+          </div>
+          <fieldset class="choice-group">
+            <legend>Updates</legend>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" disabled> Disabled option</label>
+          </fieldset>
+          <div class="form-actions">
+            <button class="button-primary" type="button">Submit example</button>
+            <button class="button-secondary" type="reset">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="theme-card" data-palette="earth" data-theme="dark" aria-labelledby="earth-dark-heading">
+        <h2 id="earth-dark-heading">Earth · Dark</h2>
+        <form class="form-example">
+          <div class="field">
+            <label for="earth-dark-name">Name <span>(required)</span></label>
+            <input class="form-control focus-ring" id="earth-dark-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="earth-dark-email">Email address</label>
+            <p class="field-hint" id="earth-dark-email-hint">Use a work email address.</p>
+            <input class="form-control focus-ring state-invalid" id="earth-dark-email" name="email" type="email" value="alex@" aria-invalid="true" aria-describedby="earth-dark-email-hint earth-dark-email-error">
+            <p class="field-error" id="earth-dark-email-error">Enter a valid email address.</p>
+          </div>
+          <div class="field">
+            <label for="earth-dark-role">Role</label>
+            <select class="form-control focus-ring" id="earth-dark-role" name="role">
+              <option value="">Choose a role</option>
+              <option>Designer</option>
+              <option>Engineer</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="earth-dark-message">Message</label>
+            <textarea class="form-control focus-ring" id="earth-dark-message" name="message"></textarea>
+          </div>
+          <fieldset class="choice-group">
+            <legend>Updates</legend>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
+            <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" disabled> Disabled option</label>
+          </fieldset>
+          <div class="form-actions">
+            <button class="button-primary" type="button">Submit example</button>
+            <button class="button-secondary" type="reset">Reset</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <p class="preview-note">The fields and buttons are examples only. Use Tab to inspect visible keyboard focus.</p>
+  </body>
+</html>

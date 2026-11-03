@@ -42,6 +42,7 @@ const primaryAction = tokens.color.action.primary;
 - [Documentation index](docs/README.md) organizes information by UI element or token topic.
 - [Colors](docs/components/colors/README.md) covers the palette and token roles; its [palette preview](docs/components/colors/preview.html) shows primitive ramps and resolved semantic colors.
 - [Buttons](docs/components/buttons/README.md) documents button selection, theme-token behavior, interaction states, and accessibility; its [preview](docs/components/buttons/preview.html) shows the constructed buttons. This preview focuses on component examples; palette swatches are in the separate Colors section.
+- [Forms](docs/components/forms/README.md) documents native form controls, accessible field structure, validation, and token-based styling; its [preview](docs/components/forms/preview.html) demonstrates example fields across themes. These are usage examples, not shipped form-control component styles.
 - `tokens/primitives/` contains primitive values; `tokens/semantic/` contains the role-based token definitions.
 - `dist/` contains the shipped package entry points. There is no documented token generation command, so do not assume generated files can be rebuilt.
 
