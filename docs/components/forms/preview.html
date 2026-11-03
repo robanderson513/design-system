@@ -124,6 +124,55 @@
         gap: var(--spacing-scale-2);
       }
 
+      .repeatable-list {
+        display: grid;
+        gap: var(--spacing-scale-3);
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .repeatable-list > legend {
+        font-size: var(--typography-font-size-title);
+      }
+
+      .repeatable-rows {
+        display: grid;
+        gap: var(--spacing-scale-3);
+      }
+
+      .repeatable-row {
+        display: grid;
+        gap: var(--spacing-scale-1);
+      }
+
+      .repeatable-field-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-scale-2);
+      }
+
+      .repeatable-field-header > label {
+        font-size: var(--typography-font-size-label);
+      }
+
+      .repeatable-field-header > [data-remove-row] {
+        font-size: var(--typography-font-size-label);
+        font-weight: var(--typography-font-weight-emphasis);
+        line-height: var(--typography-line-height-body);
+      }
+
+      .repeatable-list > [data-add-row] svg {
+        width: 16px;
+        height: 16px;
+        flex: none;
+      }
+
+      .repeatable-list > [data-add-row] {
+        justify-self: start;
+      }
+
       .form-actions {
         display: flex;
         flex-wrap: wrap;
@@ -177,6 +226,32 @@
             <label for="default-light-message">Message</label>
             <textarea class="form-control focus-ring" id="default-light-message" name="message"></textarea>
           </div>
+          <fieldset class="repeatable-list" data-repeatable-list data-id-prefix="default-light">
+            <legend>Items</legend>
+            <div class="repeatable-rows" data-repeatable-rows>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label for="default-light-item-1">Item 1</label>
+                    <button class="button-text-neutral" type="button" data-remove-row aria-label="Remove item 1">Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" id="default-light-item-1" name="items[]" type="text">
+                </div>
+              </div>
+            </div>
+            <template data-row-template>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label>Item</label>
+                    <button class="button-text-neutral" type="button" data-remove-row>Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" name="items[]" type="text">
+                </div>
+              </div>
+            </template>
+            <button class="button-text-neutral" type="button" data-add-row><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12m-6-6h12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.75"/></svg><span>Add item</span></button>
+          </fieldset>
           <fieldset class="choice-group">
             <legend>Updates</legend>
             <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
@@ -214,6 +289,32 @@
             <label for="default-dark-message">Message</label>
             <textarea class="form-control focus-ring" id="default-dark-message" name="message"></textarea>
           </div>
+          <fieldset class="repeatable-list" data-repeatable-list data-id-prefix="default-dark">
+            <legend>Items</legend>
+            <div class="repeatable-rows" data-repeatable-rows>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label for="default-dark-item-1">Item 1</label>
+                    <button class="button-text-neutral" type="button" data-remove-row aria-label="Remove item 1">Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" id="default-dark-item-1" name="items[]" type="text">
+                </div>
+              </div>
+            </div>
+            <template data-row-template>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label>Item</label>
+                    <button class="button-text-neutral" type="button" data-remove-row>Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" name="items[]" type="text">
+                </div>
+              </div>
+            </template>
+            <button class="button-text-neutral" type="button" data-add-row><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12m-6-6h12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.75"/></svg><span>Add item</span></button>
+          </fieldset>
           <fieldset class="choice-group">
             <legend>Updates</legend>
             <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
@@ -251,6 +352,32 @@
             <label for="earth-light-message">Message</label>
             <textarea class="form-control focus-ring" id="earth-light-message" name="message"></textarea>
           </div>
+          <fieldset class="repeatable-list" data-repeatable-list data-id-prefix="earth-light">
+            <legend>Items</legend>
+            <div class="repeatable-rows" data-repeatable-rows>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label for="earth-light-item-1">Item 1</label>
+                    <button class="button-text-neutral" type="button" data-remove-row aria-label="Remove item 1">Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" id="earth-light-item-1" name="items[]" type="text">
+                </div>
+              </div>
+            </div>
+            <template data-row-template>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label>Item</label>
+                    <button class="button-text-neutral" type="button" data-remove-row>Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" name="items[]" type="text">
+                </div>
+              </div>
+            </template>
+            <button class="button-text-neutral" type="button" data-add-row><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12m-6-6h12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.75"/></svg><span>Add item</span></button>
+          </fieldset>
           <fieldset class="choice-group">
             <legend>Updates</legend>
             <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
@@ -288,6 +415,32 @@
             <label for="earth-dark-message">Message</label>
             <textarea class="form-control focus-ring" id="earth-dark-message" name="message"></textarea>
           </div>
+          <fieldset class="repeatable-list" data-repeatable-list data-id-prefix="earth-dark">
+            <legend>Items</legend>
+            <div class="repeatable-rows" data-repeatable-rows>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label for="earth-dark-item-1">Item 1</label>
+                    <button class="button-text-neutral" type="button" data-remove-row aria-label="Remove item 1">Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" id="earth-dark-item-1" name="items[]" type="text">
+                </div>
+              </div>
+            </div>
+            <template data-row-template>
+              <div class="repeatable-row" data-repeatable-row>
+                <div class="field">
+                  <div class="repeatable-field-header">
+                    <label>Item</label>
+                    <button class="button-text-neutral" type="button" data-remove-row>Remove</button>
+                  </div>
+                  <input class="form-control focus-ring" name="items[]" type="text">
+                </div>
+              </div>
+            </template>
+            <button class="button-text-neutral" type="button" data-add-row><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12m-6-6h12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.75"/></svg><span>Add item</span></button>
+          </fieldset>
           <fieldset class="choice-group">
             <legend>Updates</legend>
             <label class="choice"><input class="form-control focus-ring" type="checkbox" name="updates" checked> Email me product updates</label>
@@ -300,6 +453,65 @@
         </form>
       </section>
     </main>
-    <p class="preview-note">The fields and buttons are examples only. Use Tab to inspect visible keyboard focus.</p>
+    <p class="preview-note">Repeatable item controls demonstrate adding and removing rows. Other fields and buttons are examples only. Use Tab to inspect visible keyboard focus.</p>
+    <script>
+      document.querySelectorAll("[data-repeatable-list]").forEach((list) => {
+        const rows = list.querySelector("[data-repeatable-rows]");
+        const template = list.querySelector("[data-row-template]");
+        const addButton = list.querySelector("[data-add-row]");
+        const form = list.closest("form");
+        const initialRow = rows.querySelector("[data-repeatable-row]").cloneNode(true);
+
+        const updateLabels = () => {
+          rows.querySelectorAll("[data-repeatable-row]").forEach((row, index) => {
+            const label = row.querySelector("label");
+            const input = row.querySelector("input");
+            const removeButton = row.querySelector("[data-remove-row]");
+            const itemNumber = index + 1;
+            const inputId = `${list.dataset.idPrefix}-item-${itemNumber}`;
+
+            label.htmlFor = inputId;
+            label.textContent = `Item ${itemNumber}`;
+            input.id = inputId;
+            removeButton.setAttribute("aria-label", `Remove item ${itemNumber}`);
+          });
+        };
+
+        addButton.addEventListener("click", () => {
+          const row = template.content.firstElementChild.cloneNode(true);
+          rows.append(row);
+          updateLabels();
+          row.querySelector("input").focus();
+        });
+
+        rows.addEventListener("click", (event) => {
+          if (!(event.target instanceof Element)) {
+            return;
+          }
+
+          const removeButton = event.target.closest("[data-remove-row]");
+          if (!removeButton) {
+            return;
+          }
+
+          const row = removeButton.closest("[data-repeatable-row]");
+          const currentRows = [...rows.querySelectorAll("[data-repeatable-row]")];
+          const rowIndex = currentRows.indexOf(row);
+          row.remove();
+          updateLabels();
+
+          const remainingRows = [...rows.querySelectorAll("[data-repeatable-row]")];
+          const focusRow = remainingRows[rowIndex] || remainingRows[rowIndex - 1];
+          (focusRow ? focusRow.querySelector("input") : addButton).focus();
+        });
+
+        form.addEventListener("reset", () => {
+          window.setTimeout(() => {
+            rows.replaceChildren(initialRow.cloneNode(true));
+            updateLabels();
+          }, 0);
+        });
+      });
+    </script>
   </body>
 </html>

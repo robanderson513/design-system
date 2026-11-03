@@ -13,7 +13,7 @@ Documentation is grouped by UI element or token topic. Each section keeps its gu
 
 ## Forms
 
-- [Form guidance](components/forms/README.md): native controls, field structure, validation, accessibility, and token-based styling guidance.
-- [Form preview](components/forms/preview.html): example fields across default and earth light/dark themes.
+- [Form guidance](components/forms/README.md): native controls, repeatable sections, field structure, validation, accessibility, and token-based styling guidance.
+- [Form preview](components/forms/preview.html): interactive repeatable rows and example fields across default and earth light/dark themes.
 
 For package usage and a concise consumer-oriented entry point, see the repository's [agent guide](../AGENTS.md).

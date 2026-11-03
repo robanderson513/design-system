@@ -57,6 +57,70 @@ Load the package's CSS entry points to use its tokens and shared focus utility:
 
 Use `type="email"`, `type="number"`, `type="date"`, and other input types where their native behavior is appropriate. For related choices, use a `<fieldset>` with a `<legend>` and native checkbox or radio controls. Keep the target large enough to interact with comfortably and associate a clickable label with each choice.
 
+## Repeatable sections
+
+For a list of values, group the controls in a `<fieldset>`, give each input its own visible label, and use the same array-style `name` for every row. Use buttons with explicit `type="button"` so adding or removing a row does not submit the form:
+
+```html
+<fieldset class="repeatable-list" data-repeatable-list data-id-prefix="items">
+  <legend>Items</legend>
+  <div class="repeatable-rows" data-repeatable-rows>
+    <div class="repeatable-row" data-repeatable-row>
+      <div class="field">
+        <div class="repeatable-field-header">
+          <label for="item-1">Item 1</label>
+          <button class="button-text-neutral" type="button" data-remove-row aria-label="Remove item 1">Remove</button>
+        </div>
+        <input class="form-control focus-ring" id="item-1" name="items[]" type="text">
+      </div>
+    </div>
+  </div>
+  <template data-row-template>
+    <div class="repeatable-row" data-repeatable-row>
+      <div class="field">
+        <div class="repeatable-field-header">
+          <label>Item</label>
+          <button class="button-text-neutral" type="button" data-remove-row>Remove</button>
+        </div>
+        <input class="form-control focus-ring" name="items[]" type="text">
+      </div>
+    </div>
+  </template>
+  <button class="button-text-neutral" type="button" data-add-row>
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12m-6-6h12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.75"/></svg>
+    <span>Add item</span>
+  </button>
+</fieldset>
+```
+
+For the preview's inline label/action alignment and compact add control, use a small consumer-owned layout rule:
+
+```css
+.repeatable-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-scale-2);
+}
+
+.repeatable-field-header > [data-remove-row] {
+  font-size: var(--typography-font-size-label);
+  font-weight: var(--typography-font-weight-emphasis);
+}
+
+.repeatable-list > [data-add-row] svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.repeatable-list > [data-add-row] {
+  justify-self: start;
+}
+```
+
+When adding or removing rows, keep each label associated with its input and update the remove button's accessible name to match the row. The add control is a compact, flat text action with a decorative plus icon; hide the icon from assistive technology while keeping the action text visible. Keep it below the rows. Move focus to the new input after adding, or to a neighboring input (the add button if no rows remain) after removing. The [form preview](preview.html) demonstrates the JavaScript wiring, including restoring the initial row on form reset; its repeatable-section styles and behavior are examples, not package APIs.
+
 ## Validation and states
 
 - Identify required fields in text as well as with the native `required` attribute. Do not rely on color or an asterisk alone to communicate requirements.
