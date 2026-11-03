@@ -2,7 +2,7 @@
 
 Use this guide when implementing UI with `@robanderson513/design-system`. Prefer the shipped semantic tokens and shared component styles over hard-coded colors, spacing, typography, or button states.
 
-When evaluating or extending design-system tokens and utilities, use Material UI (MUI) guidance as a reference. Adapt it to this system's semantic tokens and conventions rather than copying app-specific styles.
+When designing or documenting components, patterns, tokens, or utilities, consult the relevant Material Design guidance as a reference (including MUI guidance where useful). Adapt it to this system's semantic tokens, conventions, and accessibility requirements rather than copying app-specific styles.
 
 ## Package entry points
 
@@ -42,8 +42,12 @@ const primaryAction = tokens.color.action.primary;
 - [Documentation index](docs/README.md) organizes information by UI element or token topic.
 - [Colors](docs/components/colors/README.md) covers the palette and token roles; its [palette preview](docs/components/colors/preview.html) shows primitive ramps and resolved semantic colors.
 - [Buttons](docs/components/buttons/README.md) documents button selection, theme-token behavior, interaction states, and accessibility; its [preview](docs/components/buttons/preview.html) shows the constructed buttons. This preview focuses on component examples; palette swatches are in the separate Colors section.
-- [Forms](docs/components/forms/README.md) documents native form controls, accessible field structure, validation, and token-based styling; its [preview](docs/components/forms/preview.html) demonstrates example fields across themes. These are usage examples, not shipped form-control component styles.
+- [Forms](docs/components/forms/README.md) documents native form controls, accessible field structure, repeatable sections, validation, and token-based styling; its [preview](docs/components/forms/preview.html) demonstrates interactive repeatable rows and example fields across themes. These are usage examples, not shipped form-control component styles.
 - `tokens/primitives/` contains primitive values; `tokens/semantic/` contains the role-based token definitions.
 - `dist/` contains the shipped package entry points. There is no documented token generation command, so do not assume generated files can be rebuilt.
 
 When a needed role or component is not documented, inspect the semantic tokens and shipped CSS rather than inventing a value. Keep theme-specific decisions in semantic token mappings so consumer styles remain palette-independent.
+
+## Previewing local documentation
+
+When opening a local HTML preview in the browser canvas, serve the repository over HTTP from the current workspace root instead of using a `file://` URL. File URLs can prevent local stylesheets from loading, and a port already in use may serve a different checkout. Verify the served page contains the current changes and that its `dist/` stylesheet URLs load before presenting the preview.
