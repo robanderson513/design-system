@@ -11,4 +11,9 @@ Documentation is grouped by UI element or token topic. Each section keeps its gu
 - [Button usage and governance](components/buttons/README.md): when to choose each variant, theme and state behavior, and accessibility requirements.
 - [Button preview](components/buttons/preview.html): constructed button variants across default and earth light/dark themes, without the separate palette swatches.
 
+## Forms
+
+- [Form guidance](components/forms/README.md): native controls, field structure, validation, accessibility, and token-based styling guidance.
+- [Form preview](components/forms/preview.html): example fields across default and earth light/dark themes.
+
 For package usage and a concise consumer-oriented entry point, see the repository's [agent guide](../AGENTS.md).

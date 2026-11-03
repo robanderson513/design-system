@@ -110,7 +110,7 @@ For the default brand, add only `data-theme="dark"` to the document or a contain
 
 The shared stylesheet provides baseline, filled (`.button-primary`), tonal, elevated, outlined (`.button-secondary`), primary-colored text, neutral text (`.button-text-neutral`), and icon-only button styles that resolve through the active theme and palette. See [button guidance](docs/components/buttons/README.md) for variant and interaction-state rules, and [the button preview](docs/components/buttons/preview.html) to view the constructed buttons.
 
-For agent-assisted implementation, start with the [consumer guide](AGENTS.md). Browse the [documentation index](docs/README.md) for the separate Colors and Buttons sections.
+For agent-assisted implementation, start with the [consumer guide](AGENTS.md). Browse the [documentation index](docs/README.md) for the Colors, Buttons, and Forms sections.
 
 ### Shared utility classes
 
@@ -124,7 +124,7 @@ Numeric gap, padding, and margin utilities share the same spacing values (`gap-4
 
 ## Previewing the tokens
 
-Serve the repository root with a local HTTP server and open the [color palette preview](docs/components/colors/preview.html) or the [button preview](docs/components/buttons/preview.html) in the browser.
+Serve the repository root with a local HTTP server and open the [color palette preview](docs/components/colors/preview.html), [button preview](docs/components/buttons/preview.html), or [form preview](docs/components/forms/preview.html) in the browser.
 
 ```sh
 python -m http.server 8000
